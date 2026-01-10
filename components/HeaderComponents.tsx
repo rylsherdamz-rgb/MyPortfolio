@@ -1,6 +1,15 @@
 import {MapPin, Phone, Mail, Github} from "lucide-react"
+import {redirect} from "next/navigation"
+
 
 export default function HeaderComponents() {
+  const handleNavigation = (type : string) => {
+    if (type === "github") {
+     redirect("https://github.com/rylsherdamz-rgb?tab=overview&from=2025-12-01&to=2025-12-31") 
+    }
+
+  
+  }
   return <div className=" border-2 flex flex-row  px-10 py-5 gap-x-5 border-black rounded-2xl w-full h-full">
     <div className="w-50 h-full rounded-2xl border border-black">
 
@@ -28,7 +37,7 @@ Call Me
 Email Me
         </p></button>
 
-   <button className="bg-white text-black  border border-black hover:-translate-y-1
+   <button onClick={() => handleNavigation("github")} className="bg-white text-black  border border-black hover:-translate-y-1
           duration-300 ease-in-out px-9 gap-x-2 py-1.5
           flex w-40 h-10 rounded-xl" ><Github className="my-1" color="#000" size={16}/><p>
 Github 
