@@ -7,8 +7,7 @@ const KonosubaScene  = dynamic(
 
 
 export default function UIDesign() {
-return <div className="w-full h-full">
+return <div className="w-full h-screen">
 <KonosubaScene />
-
 </div>
 }

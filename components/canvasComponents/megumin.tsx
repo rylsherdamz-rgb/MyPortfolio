@@ -41,7 +41,7 @@ type GLTFResult = GLTF & {
 }
 
 export  function MeguminModel(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/megumin.glb') as GLTFResult
+  const { nodes, materials } = useGLTF('/models/megumin.glb') as GLTFResult
   return (
     <group {...props} dispose={null}>
       <group position={[0, 0, -0.442]} rotation={[-Math.PI / 2, 0, 0]}>

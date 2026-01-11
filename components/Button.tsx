@@ -1,4 +1,4 @@
-import {redrect} from "next/navigation"
+import {redirect} from "next/navigation"
 import {Github, Mail, Phone} from "lucide-react"
 interface ButtonProps {
   ButtonTitle : string
