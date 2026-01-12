@@ -1,8 +1,9 @@
-"use client"
 
 import { ArrowRight } from "lucide-react"
+import {useRouter} from "next/navigation"
 
 export default function HeroComponent() {
+  const router= useRouter()
   return (
     <section className="w-full flex justify-center px-6 md:px-20 py-16 md:py-24">
       <div className="w-full max-w-6xl flex flex-col gap-10">
@@ -33,12 +34,12 @@ export default function HeroComponent() {
             <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </button>
 
-          <a
-            href="#projects"
-            className="px-6 py-3 h-12 flex items-center text-gray-500 hover:text-black transition"
+          <button
+            onClick={() => router.push("/projects")}
+            className="px-6 focus:outline-none py-3 h-12 flex items-center text-gray-500 hover:text-black transition"
           >
             View Work →
-          </a>
+          </button>
         </div>
       </div>
     </section>

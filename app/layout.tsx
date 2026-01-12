@@ -41,7 +41,6 @@ export const metadata: Metadata = {
   description:
     "Hi I'm Richie Christian De Guzman. Full-stack web developer with 3 years of experience designing, developing, and deploying scalable web and mobile applications...",
 }
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -57,6 +56,7 @@ export default function RootLayout({
           ${anton.variable}
           ${robotoSlab.variable}
           antialiased
+        bg-white
         `}
       >
         {children}
