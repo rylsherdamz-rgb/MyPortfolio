@@ -16,6 +16,7 @@ export default function Home() {
   const projectsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const gsapContext = gsap.context(() => {
     const sections = [navRef.current, heroRef.current, techRef.current, projectsRef.current];
 
     gsap.from(sections, {
@@ -25,6 +26,11 @@ export default function Home() {
       ease: "power2.out",
       stagger: 0.3,
     });
+
+    })
+   return () => gsapContext.revert() 
+
+
   }, []);
 
   return (
