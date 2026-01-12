@@ -2,7 +2,7 @@
 import ProjectCarousel from "@/components/ProjectCarousel";
 import NavigationBar from "@/components/NavigationBar"
 import Footer from "@/components/Footer"
-import React, {useEffect, useRef} from "react"
+import React, {useLayoutEffect, useRef } from "react"
 import gsap from "gsap"
 
 
@@ -11,7 +11,7 @@ export default function Projects() {
   const projectRef = useRef<HTMLDivElement>(null)
   const footerRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const gsapContext = gsap.context(() => {
     const sections = [navRef.current,  projectRef.current,  footerRef.current ];
 

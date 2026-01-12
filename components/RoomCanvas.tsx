@@ -2,10 +2,11 @@
 
 import { Canvas } from "@react-three/fiber"
 import { Suspense } from "react"
+import {memo} from "react"
 import { OrbitControls, Environment, AdaptiveDpr } from "@react-three/drei"
 import { RoomModel } from "./Room"
 
-export default function RoomCanvas() {
+ function RoomCanvas() {
   return (
     <Canvas
       camera={{ position: [14, 9, 20], fov: 43 }}
@@ -50,4 +51,4 @@ export default function RoomCanvas() {
     </Canvas>
   )
 }
-
+export default memo(RoomCanvas)
