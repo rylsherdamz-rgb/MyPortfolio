@@ -13,15 +13,15 @@ export default function NavigationBar() {
           style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
           className="font-[var(--font-roboto-slab)] text-black text-lg font-bold select-none"
         >
-          rylsher<span className="text-gray-300">.dev</span>
+          rylsher<span className="text-gray-500">.dev</span>
         </p>
 
-        <div className="hidden md:flex items-center gap-5">
-          <button className="group border border-black rounded-2xl px-5 py-2 h-10 flex items-center gap-2 transition-all duration-300 hover:bg-black hover:text-white hover:-translate-y-0.5 active:translate-y-0">
-            Let&apos;s Talk
-            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-          </button>
-
+        <div className="hidden md:flex text-black items-center gap-5">
+          {/* <button className="group border border-black rounded-2xl px-5 py-2 h-10 flex items-center gap-2 transition-all duration-300 hover:bg-black hover:text-white hover:-translate-y-0.5 active:translate-y-0"> */}
+          {/*   Let&apos;s Talk */}
+          {/*   <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" /> */}
+          {/* </button> */}
+          {/**/}
           <button
             aria-label="Menu"
             className="p-2 rounded-full focus:outline-none transition hover:bg-black/10 active:scale-95"
@@ -32,7 +32,7 @@ export default function NavigationBar() {
 
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden p-2 rounded-full transition 
+          className="md:hidden text-black p-2 rounded-full transition 
           focus:outline-none
           hover:bg-black/10 active:scale-95"
         >
@@ -50,10 +50,10 @@ export default function NavigationBar() {
         }`}
       >
         <div className="flex flex-col gap-4 border-t pt-4">
-          <button className="group focus-outline-none w-full border border-black rounded-2xl px-5 py-3 flex items-center justify-center gap-2 transition-all hover:bg-black hover:text-white">
-            Let&apos;s Talk
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </button>
+          {/* <button className="group focus-outline-none w-full border border-black rounded-2xl px-5 py-3 flex items-center justify-center gap-2 transition-all hover:bg-black hover:text-white"> */}
+          {/*   Let&apos;s Talk */}
+          {/*   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" /> */}
+          {/* </button> */}
         </div>
       </div>
     </nav>
