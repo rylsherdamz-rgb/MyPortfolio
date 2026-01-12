@@ -11,7 +11,7 @@ export default function NavigationBar() {
   return (
     <nav className="w-full px-6 md:px-20 py-5 flex flex-col">
       <div className="flex items-center justify-between">
-        <p
+        <p onClick={() => router.replace("/")}
           style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
           className="font-[var(--font-roboto-slab)] text-black text-lg font-bold select-none"
         >
