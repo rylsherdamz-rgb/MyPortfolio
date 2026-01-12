@@ -7,9 +7,9 @@ import gsap from "gsap";
 
 export default function techStack() {
 
-  const navRef = useRef<React.HTMLDivElement>(null)
-  const techRef = useRef<React.HTMLDivElement>(null)
-  const footerRef = useRef<React.HTMLDivElement>(null)
+  const navRef = useRef<HTMLDivElement>(null)
+  const techRef = useRef<HTMLDivElement>(null)
+  const footerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const gsapContext = gsap.context(() => {

@@ -7,9 +7,9 @@ import gsap from "gsap"
 
 
 export default function Projects() {
-  const navRef = useRef<React.HTMLDivElement>(null)
-  const projectRef = useRef<React.HTMLDivElement>(null)
-  const footerRef = useRef<React.HTMLDivElement>(null)
+  const navRef = useRef<HTMLDivElement>(null)
+  const projectRef = useRef<HTMLDivElement>(null)
+  const footerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const gsapContext = gsap.context(() => {
