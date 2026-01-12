@@ -40,6 +40,7 @@ export default function HeroComponent() {
           >
             View Work →
           </button>
+          
         </div>
       </div>
     </section>

@@ -4,20 +4,23 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 import NavigationBar from "@/components/NavigationBar";
+import Footer from "@/components/Footer"
 import TechStack from "@/components/TechStack";
 import HeroComponents from "@/components/HeroComponents";
+import Socials from "@/components/Social"
 import ProjectCarousel from "@/components/ProjectCarousel";
 
 export default function Home() {
-  // Refs for each section
   const navRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElemetnt>(null)
   const techRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const socialRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const gsapContext = gsap.context(() => {
-    const sections = [navRef.current, heroRef.current, techRef.current, projectsRef.current];
+    const sections = [navRef.current, heroRef.current, techRef.current, projectsRef.current, socialRef.current, footerRef.current ];
 
     gsap.from(sections, {
       opacity: 0,
@@ -49,6 +52,12 @@ export default function Home() {
 
       <div ref={projectsRef}>
         <ProjectCarousel />
+      </div>
+      <div ref={socialRef}>
+        <Socials />
+      </div>
+      <div>
+      <Footer />
       </div>
     </div>
   );
