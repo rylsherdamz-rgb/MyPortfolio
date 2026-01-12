@@ -16,7 +16,6 @@ type GLTFResult = GLTF & {
     Book002_White_0: THREE.Mesh
     Book001_Orange_0: THREE.Mesh
     Monoblock_Metal_0: THREE.Mesh
-    Monoblock_White_0: THREE.Mesh
     Monoblock_Screen_0: THREE.Mesh
     Tourbox_controller_Black1_0: THREE.Mesh
     Soft_Paper_Lamp_Paper_Lamp_0: THREE.Mesh
@@ -28,9 +27,7 @@ type GLTFResult = GLTF & {
     PaletteMaterial002: THREE.MeshPhysicalMaterial
     PaletteMaterial003: THREE.MeshStandardMaterial
     PaletteMaterial001: THREE.MeshPhysicalMaterial
-    PaletteMaterial002: THREE.MeshPhysicalMaterial
     Screen: THREE.MeshPhysicalMaterial
-    PaletteMaterial003: THREE.MeshStandardMaterial
     PaletteMaterial004: THREE.MeshPhysicalMaterial
     PaletteMaterial005: THREE.MeshPhysicalMaterial
     Photo: THREE.MeshStandardMaterial
