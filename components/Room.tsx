@@ -32,7 +32,7 @@ type GLTFResult = GLTF & {
 }
 
 export function RoomModel(props: ThreeElements['group']) {
-  const { nodes, materials } = useGLTF('/models/oproom.glb') as GLTFResult
+  const { nodes, materials } = useGLTF('/models/oproom.glb') as unknown as GLTFResult
 
   return (
     <group {...props} dispose={null}>
