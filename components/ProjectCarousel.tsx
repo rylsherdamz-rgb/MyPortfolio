@@ -1,6 +1,7 @@
 "use client"
 
 import useEmblaCarousel from "embla-carousel-react"
+import { Github, ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import { projects } from "@/constants/projects"
 import { useRouter, usePathname } from "next/navigation"
@@ -8,7 +9,7 @@ import { useRouter, usePathname } from "next/navigation"
 export default function ProjectCarousel() {
   const router = useRouter()
   const pathname = usePathname()
-  const isFullPage = pathname === "/projects" 
+  const isFullPage = pathname === "/projects"
 
   const [emblaRef] = useEmblaCarousel({
     loop: false,
@@ -18,48 +19,56 @@ export default function ProjectCarousel() {
   return (
     <section
       className={`${
-        isFullPage ? "w-full h-full p-8" : "w-[90%] mx-[5%] p-6 rounded-2xl border border-neutral-200"
-      }  bg-white text-black`}
+        isFullPage
+          ? "w-full h-full p-8"
+          : "w-[90%] mx-[5%] p-6 rounded-2xl border border-neutral-200"
+      } bg-white text-black`}
     >
-      <h2 className="mb-6 text-lg font-semibold tracking-tight">Projects</h2>
+      <h2 className="mb-6 text-lg font-semibold tracking-tight">
+        Projects
+      </h2>
 
       <div
         ref={emblaRef}
-        className="overflow-hidden cursor-grab"
+        className="overflow-hidden cursor-grab active:cursor-grabbing"
       >
         <div className="flex gap-6">
           {projects.map((project) => (
             <div
               key={project.title}
-              className={`flex-shrink-0 cursor-pointer
-                w-[90%] sm:w-[60%] md:w-[45%] lg:w-[30%] xl:w-[25%]`}
-              onClick={() => router.push(project.link)}
+              className="flex-shrink-0 w-[90%] sm:w-[60%] md:w-[45%] lg:w-[30%] xl:w-[25%]"
             >
               <article
-                className="h-[400px] rounded-xl border border-neutral-200
-                overflow-hidden hover:scale-95 transition-transform duration-300 flex flex-col shadow-sm"
+                className="
+                  flex h-[420px] flex-col overflow-hidden
+                  rounded-xl border border-neutral-200
+                  shadow-sm transition-transform
+                "
               >
                 {/* Image */}
-                <div className="relative h-64 w-full">
+                <div className="relative h-64 w-full bg-neutral-50">
                   <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-contain"
+                    className="object-contain p-4"
+                    sizes="(max-width: 768px) 90vw, 25vw"
                   />
                 </div>
 
                 {/* Content */}
-                <div className="p-4 flex-1 flex flex-col justify-between">
+                <div className="flex flex-1 flex-col justify-between p-4">
                   <div>
-                    <h3 className="font-medium text-lg">{project.title}</h3>
-                    <p className="text-sm text-neutral-600 mt-1 break-words line-clamp-3">
+                    <h3 className="text-lg font-medium">
+                      {project.title}
+                    </h3>
+                    <p className="mt-1 line-clamp-3 text-sm text-neutral-600">
                       {project.description}
                     </p>
                   </div>
 
-                  {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-2 pt-2">
+                  {/* Tech Stack */}
+                  <div className="mt-3 flex flex-wrap gap-2">
                     {project.tech.map((t) => (
                       <span
                         key={t}
@@ -68,6 +77,57 @@ export default function ProjectCarousel() {
                         {t}
                       </span>
                     ))}
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:gap-3">
+                    <button
+                      onClick={() => router.push(project.projectURL)}
+                      className="
+                        group
+                        flex w-full items-center justify-center gap-2
+                        rounded-md border border-neutral-300
+                        px-4 py-2 text-xs font-medium
+                        text-neutral-800 transition
+                        hover:border-black hover:bg-neutral-100
+                        active:scale-[0.98]
+                        focus-visible:outline-none
+                        focus-visible:ring-2 focus-visible:ring-black
+                        sm:w-auto
+                      "
+                    >
+                      <Github
+                        size={14}
+                        className="transition group-hover:scale-110"
+                      />
+                      <span>Repository</span>
+                    </button>
+
+                    <button
+                      onClick={() => router.push(project.link)}
+                      className="
+                        group
+                        flex w-full items-center justify-center gap-2
+                        rounded-md bg-black
+                        px-4 py-2 text-xs font-medium
+                        text-white transition
+                        hover:bg-neutral-800
+                        active:scale-[0.98]
+                        focus-visible:outline-none
+                        focus-visible:ring-2 focus-visible:ring-black
+                        sm:w-auto
+                      "
+                    >
+                      <span>Live Site</span>
+                      <ArrowUpRight
+                        size={14}
+                        className="
+                          transition-transform
+                          group-hover:-translate-y-0.5
+                          group-hover:translate-x-0.5
+                        "
+                      />
+                    </button>
                   </div>
                 </div>
               </article>
