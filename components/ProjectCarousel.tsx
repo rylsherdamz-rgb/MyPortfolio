@@ -8,7 +8,6 @@ export default function ProjectCarousel() {
   const [emblaRef] = useEmblaCarousel({
     loop: false,
     align: "start",
-    draggable: true,
   })
 
   return (
