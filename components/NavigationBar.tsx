@@ -64,8 +64,29 @@ export default function NavigationBar() {
         }`}
       >
         <div className="flex flex-col gap-4 border-t pt-4">
-          <p>Projects</p>  
-          <p>Tect Stack</p>
+        <p
+          onClick={() => router.push("/projects")}
+          style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
+          className="font-[var(--font-roboto-slab)] hover:text-gray-500 transition-300 ease-in-out text-black text-lg font-bold select-none"
+        >
+          Projects
+        </p>
+         <p
+
+          onClick={() => router.push("/techstack")}
+          style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
+          className="font-[var(--font-roboto-slab)] hover:text-gray-500 transition-300 ease-in-out  text-black text-lg font-bold select-none"
+        >
+          TechStack
+        </p>
+        <p
+
+          onClick={() => router.push("/socials")}
+          style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
+          className="font-[var(--font-roboto-slab)] hover:text-gray-500 transition-300 ease-in-out  text-black text-lg font-bold select-none"
+        >
+            Socials
+        </p>
         </div>
       </div>
     </nav>
