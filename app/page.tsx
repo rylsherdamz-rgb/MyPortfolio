@@ -1,13 +1,14 @@
+"use client"
+
 import NavigationBar from "@/components/NavigationBar"
+import TechStack from "@/components/TechStack"
 import HeroComponents from "@/components/HeroComponents"
 
 
 export default function Home() {
-  return <div className="w-full h-screen flex flex-col gap-y-5 bg-white">
-    
+  return <div className="w-full h-full flex flex-col bg-white">
     <NavigationBar />
-    <div>
-      <HeroComponents />
-    </div>
+    <HeroComponents />
+    <TechStack />
   </div>
 }
