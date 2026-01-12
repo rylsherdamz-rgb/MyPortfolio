@@ -1,7 +1,9 @@
 import { Icon } from "@iconify/react"
 import { techStack } from "@/constants/techstack"
+import {useRouter} from "next/navigation"
 
 export default function TechStack() {
+  const router = useRouter()
   const categories = Object.entries(techStack).filter(
     ([category]) =>
       category === "Frontend" ||
@@ -11,9 +13,16 @@ export default function TechStack() {
 
   return (
     <section className="w-[90%] mx-[5%] rounded-2xl border border-neutral-200 bg-white px-6 py-2 text-black">
+    <div className="flex flex-row justify-between">
       <h2 className="mb-6 text-lg font-semibold tracking-tight">
         Tech Stack
       </h2>
+      <button  onClick={() => router.push("/textstack")} className="hover:underline">
+        <p className="">See More</p>
+      </button>
+    </div>
+   
+
 
       <div className="space-y-6">
         {categories.map(([category, items]) => (
