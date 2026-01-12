@@ -19,6 +19,7 @@ export default function Home() {
   const socialRef = useRef<HTMLDivElement>(null)
   const footerRef = useRef<HTMLDivElement>(null)
 
+  // update this to have the ui component loading animation 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(
@@ -60,6 +61,7 @@ export default function Home() {
         <div
           className="
             absolute
+            max-sm:hidden
           z-1
             right-0
             top-1/2
