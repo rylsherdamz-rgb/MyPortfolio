@@ -34,15 +34,7 @@ export default function NavigationBar() {
         >
           TechStack
         </p>
-        <p
-
-          onClick={() => router.push("/socials")}
-          style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
-          className="font-[var(--font-roboto-slab)] hover:text-gray-500 transition-300 ease-in-out  text-black text-lg font-bold select-none"
-        >
-            Socials
-        </p>
-        </div>
+       </div>
 
         <button
           onClick={() => setOpen(!open)}
@@ -79,15 +71,7 @@ export default function NavigationBar() {
         >
           TechStack
         </p>
-        <p
-
-          onClick={() => router.push("/socials")}
-          style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
-          className="font-[var(--font-roboto-slab)] hover:text-gray-500 transition-300 ease-in-out  text-black text-lg font-bold select-none"
-        >
-            Socials
-        </p>
-        </div>
+       </div>
       </div>
     </nav>
   )
