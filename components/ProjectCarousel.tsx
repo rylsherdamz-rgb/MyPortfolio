@@ -22,7 +22,7 @@ export default function ProjectCarousel() {
         isFullPage
           ? "w-full h-full p-8"
           : "w-[90%] mx-[5%] p-6 rounded-2xl border border-neutral-200"
-      } bg-white text-black`}
+      } bg-white text-black relative`}
     >
       <h2 className="mb-6 text-lg font-semibold tracking-tight">
         Projects
@@ -45,7 +45,6 @@ export default function ProjectCarousel() {
                   shadow-sm transition-transform
                 "
               >
-                {/* Image */}
                 <div className="relative h-64 w-full bg-neutral-50">
                   <Image
                     src={project.image}
@@ -56,7 +55,6 @@ export default function ProjectCarousel() {
                   />
                 </div>
 
-                {/* Content */}
                 <div className="flex flex-1 flex-col justify-between p-4">
                   <div>
                     <h3 className="text-lg font-medium">
@@ -67,7 +65,6 @@ export default function ProjectCarousel() {
                     </p>
                   </div>
 
-                  {/* Tech Stack */}
                   <div className="mt-3 flex flex-wrap gap-2">
                     {project.tech.map((t) => (
                       <span
@@ -79,53 +76,38 @@ export default function ProjectCarousel() {
                     ))}
                   </div>
 
-                  {/* Buttons */}
                   <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:gap-3">
                     <button
-                      onClick={() => router.push(project.projectURL)}
                       className="
-                        group
-                        flex w-full items-center justify-center gap-2
+                        group flex w-full items-center justify-center gap-2
                         rounded-md border border-neutral-300
-                        px-4 py-2 text-xs font-medium
-                        text-neutral-800 transition
-                        hover:border-black hover:bg-neutral-100
+                        px-4 py-2 text-xs font-medium text-neutral-800
+                        transition hover:border-black hover:bg-neutral-100
                         active:scale-[0.98]
-                        focus-visible:outline-none
-                        focus-visible:ring-2 focus-visible:ring-black
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black
                         sm:w-auto
                       "
                     >
-                      <Github
-                        size={14}
-                        className="transition group-hover:scale-110"
-                      />
+                      <Github size={14} className="transition group-hover:scale-110" />
                       <span>Repository</span>
                     </button>
 
                     <button
                       onClick={() => router.push(project.link)}
                       className="
-                        group
-                        flex w-full items-center justify-center gap-2
-                        rounded-md bg-black
-                        px-4 py-2 text-xs font-medium
-                        text-white transition
-                        hover:bg-neutral-800
+                        group flex w-full items-center justify-center gap-2
+                        rounded-md bg-black px-4 py-2
+                        text-xs font-medium text-white
+                        transition hover:bg-neutral-800
                         active:scale-[0.98]
-                        focus-visible:outline-none
-                        focus-visible:ring-2 focus-visible:ring-black
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black
                         sm:w-auto
                       "
                     >
                       <span>Live Site</span>
                       <ArrowUpRight
                         size={14}
-                        className="
-                          transition-transform
-                          group-hover:-translate-y-0.5
-                          group-hover:translate-x-0.5
-                        "
+                        className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                       />
                     </button>
                   </div>
@@ -135,6 +117,28 @@ export default function ProjectCarousel() {
           ))}
         </div>
       </div>
+
+      {!isFullPage && (
+        <div className="absolute top-5 right-0">
+          <button
+            onClick={() => router.push("/projects")}
+            className="
+              group flex items-center gap-2
+              rounded-md  
+              px-5 py-2 text-sm font-medium text-neutral-800
+              transition 
+              active:scale-[0.98]
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black
+            "
+          >
+            <span>See more projects</span>
+            <ArrowUpRight
+              size={16}
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </button>
+        </div>
+      )}
     </section>
   )
 }
