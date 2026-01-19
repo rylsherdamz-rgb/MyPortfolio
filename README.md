@@ -11,9 +11,9 @@ Built with performance, responsiveness, and clean UI in mind.
 
 ### Desktop View
 
+![Desktop View 3](public/desktopView3.png)
 ![Desktop View 1](public/desktopView1.png)
 ![Desktop View 2](public/desktopView2.png)
-![Desktop View 3](public/desktopView3.png)
 
 ---
 
