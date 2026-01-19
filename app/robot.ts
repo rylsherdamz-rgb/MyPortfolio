@@ -5,8 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/_next/'], // Keep crawlers out of internal system files
+      disallow: ['/_next/'],
     },
+
     sitemap: 'https://richie-christian-de-guzman.vercel.app/',
   }
 }
