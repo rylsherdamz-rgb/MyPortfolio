@@ -48,6 +48,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="google-site-verification" content="apb_P3D--8M4e_6IHv6eB5ZLlxNbBaTvcP66dJdsKnc" />
+      </head>
       <body
         className={`
           ${geistSans.variable}
