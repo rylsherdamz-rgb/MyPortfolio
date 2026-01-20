@@ -19,7 +19,6 @@ export default function Home() {
   const socialRef = useRef<HTMLDivElement>(null)
   const footerRef = useRef<HTMLDivElement>(null)
 
-  // update this to have the ui component loading animation 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(
@@ -51,25 +50,28 @@ export default function Home() {
         <NavigationBar />
       </div>
 
-      {/* HERO SECTION */}
       <div
         ref={heroRef}
-        className="relative w-full min-h-[80vh] flex items-center"
+        className="relative w-full min-h-[80vh] flex items-center px-6 md:px-12"
       >
-        <HeroComponents />
+        <div className="z-10 w-full md:w-[60%] lg:w-[55%]">
+          <HeroComponents />
+        </div>
 
         <div
           className="
             absolute
-            max-sm:hidden
-          z-1
-            right-0
+            z-0
             top-1/2
             -translate-y-1/2
-            w-[45%]
-            h-[70%]
             hidden
-            lg:block
+            md:block
+            md:right-[-10%]
+            md:w-[70%]
+            md:h-[50%]
+            lg:right-0
+            lg:w-[45%]
+            lg:h-[70%]
             pointer-events-none
           "
         >
@@ -95,4 +97,3 @@ export default function Home() {
     </div>
   )
 }
-
