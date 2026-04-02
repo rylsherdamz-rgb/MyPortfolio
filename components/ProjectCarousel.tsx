@@ -79,7 +79,7 @@ export default function ProjectCarousel() {
                   <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:gap-3">
                     {project.projectURL ? 
                     (<button
-                      onClick={() => router.push(project.projectURL)}
+                      onClick={() => router.push(project?.projectURL)}
                       className="
                         group flex w-full items-center justify-center gap-2
                         rounded-md border border-neutral-300
@@ -95,7 +95,7 @@ export default function ProjectCarousel() {
                     </button>) : null
                     }
                     <button
-                      onClick={() => router.push(project.link)}
+                      onClick={() => router.push(project?.link)}
                       className="
                         group flex w-full items-center justify-center gap-2
                         rounded-md bg-black px-4 py-2
