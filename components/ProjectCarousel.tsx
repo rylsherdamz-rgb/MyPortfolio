@@ -35,7 +35,7 @@ export default function ProjectCarousel() {
         <div className="flex gap-6">
           {projects.map((project) => (
             <div
-              key={project.title}
+              key={project?.title}
               className="flex-shrink-0 w-[90%] sm:w-[60%] md:w-[45%] lg:w-[30%] xl:w-[25%]"
             >
               <article
@@ -47,8 +47,8 @@ export default function ProjectCarousel() {
               >
                 <div className="relative h-64 w-full bg-neutral-50">
                   <Image
-                    src={project.image}
-                    alt={project.title}
+                    src={project?.image}
+                    alt={project?.title}
                     fill
                     className="object-contain p-4"
                     sizes="(max-width: 768px) 90vw, 25vw"
@@ -58,15 +58,15 @@ export default function ProjectCarousel() {
                 <div className="flex flex-1 flex-col justify-between p-4">
                   <div>
                     <h3 className="text-lg font-medium">
-                      {project.title}
+                      {project?.title}
                     </h3>
                     <p className="mt-1 line-clamp-3 text-sm text-neutral-600">
-                      {project.description}
+                      {project?.description}
                     </p>
                   </div>
 
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {project.tech.map((t) => (
+                    {project?.tech.map((t) => (
                       <span
                         key={t}
                         className="rounded-md bg-neutral-100 px-2 py-1 text-xs text-neutral-600"
@@ -77,7 +77,7 @@ export default function ProjectCarousel() {
                   </div>
 
                   <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:gap-3">
-                    {project.projectURL ? 
+                    {project?.projectURL ? 
                     (<button
                       onClick={() => router.push(project?.projectURL)}
                       className="
