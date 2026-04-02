@@ -77,7 +77,9 @@ export default function ProjectCarousel() {
                   </div>
 
                   <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:gap-3">
-                    <button
+                    {project.projectURL ? 
+                    (<button
+                      onClick={() => router.push(project.projectURL)}
                       className="
                         group flex w-full items-center justify-center gap-2
                         rounded-md border border-neutral-300
@@ -90,8 +92,8 @@ export default function ProjectCarousel() {
                     >
                       <Github size={14} className="transition group-hover:scale-110" />
                       <span>Repository</span>
-                    </button>
-
+                    </button>) : null
+                    }
                     <button
                       onClick={() => router.push(project.link)}
                       className="
