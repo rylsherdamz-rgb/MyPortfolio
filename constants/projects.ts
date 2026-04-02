@@ -20,7 +20,7 @@ export const projects = [
     description: `Yuwi is a warm, lightweight study app built with Expo and React Native. It is designed to make capturing source material, turning it into text, and generating quizzes feel straightforward instead of technical.`,
     image: "/yuwi/yuwi.png",
     tech: ["React Native", "Expo", "NativeWind", "Gemini API"],
-    link: "https://cadena-two.vercel.app/",
+    link: "https://yuwi-website.vercel.app/",
   },,
 
 
