@@ -55,7 +55,7 @@ export const projects: Project[] = [
   {
     title: "dMessage",
     description: "A fully on-chain decentralized messaging app with end-to-end encryption using X25519 ECDH + AES-GCM-256. Built on Stellar Soroban with IPFS storage for encrypted content.",
-    image: "/dmessage/landing.png",
+    image: "/dmessage/messages.png",
     tech: ["Next.js", "Stellar Soroban", "Rust", "TypeScript", "IPFS", "E2EE"],
     projectURL: "https://github.com/rylsherdamz-rgb/dMessage",
     link: "https://dmessage.vercel.app/",
