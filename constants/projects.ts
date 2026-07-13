@@ -43,7 +43,8 @@ export const projects: Project[] = [
     description: "A feature-rich photo booth application that applies artistic filters and effects to photos. Built with React and Vite, featuring real-time image processing and collage creation.",
     image: "/photobooth/screenshot.png",
     tech: ["React", "Vite", "TypeScript", "CSS"],
-    link: "https://github.com/rylsherdamz-rgb/PhotoBooth",
+    projectURL: "https://github.com/rylsherdamz-rgb/PhotoBooth",
+    link: "https://snap-charm.vercel.app/",
   },
   {
     title: "Noir Wallet",
