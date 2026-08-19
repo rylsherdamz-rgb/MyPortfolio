@@ -85,23 +85,23 @@ export default function Home() {
         </div>
       </div>
 
-      <div ref={techRef}>
+      <div ref={techRef} id="tech-stack" className="scroll-mt-20">
         <TechStack />
       </div>
 
-      <div ref={projectsRef}>
+      <div ref={projectsRef} id="projects" className="scroll-mt-20">
         <ProjectCarousel />
       </div>
 
-      <div ref={achievementsRef}>
+      <div ref={achievementsRef} id="achievements" className="scroll-mt-20">
         <Achievements />
       </div>
 
-      <div ref={postsRef}>
+      <div ref={postsRef} id="posts" className="scroll-mt-20">
         <LinkedInPosts />
       </div>
 
-      <div ref={socialRef}>
+      <div ref={socialRef} id="connect" className="scroll-mt-20">
         <Socials />
       </div>
 

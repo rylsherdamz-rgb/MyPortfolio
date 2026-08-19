@@ -4,13 +4,8 @@ import useEmblaCarousel from "embla-carousel-react"
 import { Github, ArrowUpRight, FolderOpen } from "lucide-react"
 import Image from "next/image"
 import { projects } from "@/constants/projects"
-import { useRouter, usePathname } from "next/navigation"
 
 export default function ProjectCarousel() {
-  const router = useRouter()
-  const pathname = usePathname()
-  const isFullPage = pathname === "/projects"
-
   const [emblaRef] = useEmblaCarousel({
     loop: false,
     align: "start",
@@ -19,48 +14,18 @@ export default function ProjectCarousel() {
   const handleLink = (url: string) => {
     if (url.startsWith("http")) {
       window.open(url, "_blank", "noopener,noreferrer")
-    } else {
-      router.push(url)
     }
   }
 
   return (
-    <section
-      className={`${
-        isFullPage
-          ? "w-full h-full p-8"
-          : "w-[90%] mx-[5%] p-6 rounded-2xl border border-neutral-200"
-      } bg-white text-black relative`}
-    >
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-neutral-100">
-            <FolderOpen className="h-5 w-5 text-neutral-700" />
-          </span>
-          <h2 className="font-[var(--font-roboto-slab)] text-lg font-bold tracking-tight">
-            Projects
-          </h2>
-        </div>
-
-        {!isFullPage && (
-          <button
-            onClick={() => router.push("/projects")}
-            className="
-              group flex items-center gap-2
-              rounded-md
-              px-4 py-2 text-sm font-medium text-neutral-800
-              transition hover:text-black
-              active:scale-[0.98]
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black
-            "
-          >
-            <span>See more projects</span>
-            <ArrowUpRight
-              size={16}
-              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </button>
-        )}
+    <section className="w-[90%] mx-[5%] p-6 rounded-2xl border border-neutral-200 bg-white text-black relative">
+      <div className="flex items-center gap-3 mb-6">
+        <span className="grid h-9 w-9 place-items-center rounded-xl bg-neutral-100">
+          <FolderOpen className="h-5 w-5 text-neutral-700" />
+        </span>
+        <h2 className="font-[var(--font-roboto-slab)] text-lg font-bold tracking-tight">
+          Projects
+        </h2>
       </div>
 
       <div

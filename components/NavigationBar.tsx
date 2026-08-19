@@ -2,25 +2,27 @@
 
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
-import { useRouter, usePathname } from "next/navigation"
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "Tech Stack", href: "/techstack" },
+  { label: "Home", target: "home" },
+  { label: "Tech Stack", target: "tech-stack" },
+  { label: "Projects", target: "projects" },
+  { label: "Achievements", target: "achievements" },
+  { label: "Connect", target: "connect" },
 ]
 
 export default function NavigationBar() {
   const [open, setOpen] = useState(false)
-  const router = useRouter()
-  const pathname = usePathname()
 
-  const handleNavigate = (href: string) => {
+  const scrollToSection = (target: string) => {
     setOpen(false)
-    if (href === "/" && pathname === "/") {
+    if (target === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" })
-    } else {
-      router.push(href)
+      return
+    }
+    const el = document.getElementById(target)
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" })
     }
   }
 
@@ -33,7 +35,7 @@ export default function NavigationBar() {
     <nav className="w-full px-6 md:px-20 py-5 flex flex-col">
       <div className="flex items-center justify-between">
         <button
-          onClick={() => handleNavigate("/")}
+          onClick={() => scrollToSection("home")}
           style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
           className="font-[var(--font-roboto-slab)] text-black text-lg font-bold select-none cursor-pointer"
         >
@@ -44,13 +46,8 @@ export default function NavigationBar() {
           {navLinks.map((link) => (
             <button
               key={link.label}
-              onClick={() => handleNavigate(link.href)}
-              className={[
-                "text-sm font-medium transition-colors cursor-pointer select-none",
-                pathname === link.href
-                  ? "text-black underline underline-offset-8 decoration-2"
-                  : "text-neutral-500 hover:text-black",
-              ].join(" ")}
+              onClick={() => scrollToSection(link.target)}
+              className="text-sm font-medium text-neutral-500 transition-colors hover:text-black cursor-pointer select-none"
             >
               {link.label}
             </button>
@@ -81,18 +78,15 @@ export default function NavigationBar() {
 
       <div
         className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-          open ? "max-h-80 opacity-100 mt-4" : "max-h-0 opacity-0"
+          open ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
         }`}
       >
         <div className="flex flex-col gap-4 border-t pt-4">
           {navLinks.map((link) => (
             <button
               key={link.label}
-              onClick={() => handleNavigate(link.href)}
-              className={[
-                "text-left text-lg font-medium cursor-pointer select-none transition-colors",
-                pathname === link.href ? "text-black" : "text-neutral-500 hover:text-black",
-              ].join(" ")}
+              onClick={() => scrollToSection(link.target)}
+              className="text-left text-lg font-medium text-neutral-500 hover:text-black cursor-pointer select-none transition-colors"
             >
               {link.label}
             </button>

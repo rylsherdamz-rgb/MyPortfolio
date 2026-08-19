@@ -1,9 +1,28 @@
-import Link from "next/link"
+"use client"
+
 import { socials, email } from "@/constants/socials"
 import { Icon } from "@iconify/react"
 
+const pages = [
+  { label: "Home", target: "home" },
+  { label: "Projects", target: "projects" },
+  { label: "Tech Stack", target: "tech-stack" },
+  { label: "Connect", target: "connect" },
+]
+
 export default function Footer() {
   const year = new Date().getFullYear()
+
+  const scrollToSection = (target: string) => {
+    if (target === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      return
+    }
+    const el = document.getElementById(target)
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
 
   return (
     <footer className="w-full bg-neutral-950 text-neutral-400 py-12">
@@ -26,9 +45,15 @@ export default function Footer() {
             Pages
           </p>
           <div className="flex flex-col gap-2 text-sm">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <Link href="/projects" className="hover:text-white transition-colors">Projects</Link>
-            <Link href="/techstack" className="hover:text-white transition-colors">Tech Stack</Link>
+            {pages.map((page) => (
+              <button
+                key={page.target}
+                onClick={() => scrollToSection(page.target)}
+                className="text-left hover:text-white transition-colors cursor-pointer"
+              >
+                {page.label}
+              </button>
+            ))}
           </div>
         </div>
 

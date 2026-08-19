@@ -45,9 +45,18 @@ Built with performance, responsiveness, and clean UI in mind.
 
 ## Pages
 
-- `/` – Home
-- `/projects` – Full projects showcase
-- `/socials` – Social links and contact form
+Single-page site — all sections scroll on one page:
+
+- **Home** – Hero with role badges, stats, and CV download
+- **Tech Stack** – Frontend, backend, mobile, Web3, data, cloud
+- **Projects** – Interactive project carousel
+- **Achievements** – Hackathons, honors, and certifications
+- **LinkedIn** – Live posts pulled from LinkedIn
+- **Connect** – Social links and contact
+
+## API
+
+- `/api/linkedin` – Server-side pipeline that pulls live post data from LinkedIn, with fallback to static data.
 
 ---
 

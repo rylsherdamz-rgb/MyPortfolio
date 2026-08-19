@@ -1,7 +1,6 @@
 "use client"
 
 import { MapPin, Download, ArrowUpRight } from "lucide-react"
-import { useRouter } from "next/navigation"
 import { stats } from "@/constants/achievements"
 
 const roles = ["Full-Stack Developer", "Data Analyst", "Blockchain Developer"]
@@ -9,7 +8,12 @@ const roles = ["Full-Stack Developer", "Data Analyst", "Blockchain Developer"]
 const resumePath = "/De_Guzman_Richie_Christian_Resume_Updated.pdf"
 
 export default function HeroComponent() {
-  const router = useRouter()
+  const scrollToProjects = () => {
+    const el = document.getElementById("projects")
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
 
   return (
     <section className="w-full flex justify-center px-6 md:px-20 py-16 md:py-24">
@@ -68,7 +72,7 @@ export default function HeroComponent() {
           </a>
 
           <button
-            onClick={() => router.push("/projects")}
+            onClick={scrollToProjects}
             className="group flex items-center gap-2 h-12 px-6 rounded-full border border-neutral-200 text-neutral-700 transition-all duration-300 hover:border-black hover:text-black hover:-translate-y-1 active:translate-y-0"
           >
             View Work
