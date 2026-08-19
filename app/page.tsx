@@ -11,6 +11,7 @@ import HeroComponents from "@/components/HeroComponents"
 import Socials from "@/components/Social"
 import ProjectCarousel from "@/components/ProjectCarousel"
 import Achievements from "@/components/Achievements"
+import LinkedInPosts from "@/components/LinkedInPosts"
 
 export default function Home() {
   const navRef = useRef<HTMLDivElement>(null)
@@ -19,6 +20,7 @@ export default function Home() {
   const projectsRef = useRef<HTMLDivElement>(null)
   const achievementsRef = useRef<HTMLDivElement>(null)
   const socialRef = useRef<HTMLDivElement>(null)
+  const postsRef = useRef<HTMLDivElement>(null)
   const footerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export default function Home() {
           projectsRef.current,
           achievementsRef.current,
           socialRef.current,
+          postsRef.current,
           footerRef.current,
         ],
         {
@@ -96,6 +99,10 @@ export default function Home() {
 
       <div ref={socialRef}>
         <Socials />
+      </div>
+
+      <div ref={postsRef}>
+        <LinkedInPosts />
       </div>
 
       <div ref={footerRef}>
