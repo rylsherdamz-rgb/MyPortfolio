@@ -1,17 +1,15 @@
 "use client"
 
-import { ArrowRight, MapPin, Mail, Github } from "lucide-react"
+import { MapPin, Download, ArrowUpRight } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { stats } from "@/constants/achievements"
 
 const roles = ["Full-Stack Developer", "Data Analyst", "Blockchain Developer"]
 
+const resumePath = "/De_Guzman_Richie_Christian_Resume_Updated.pdf"
+
 export default function HeroComponent() {
   const router = useRouter()
-
-  const handleEmail = () => {
-    window.location.href = "mailto:richiechristiandeguzman11@gmail.com"
-  }
 
   return (
     <section className="w-full flex justify-center px-6 md:px-20 py-16 md:py-24">
@@ -59,29 +57,22 @@ export default function HeroComponent() {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-4 mt-4">
-          <button
-            onClick={handleEmail}
+        <div className="flex flex-wrap items-center gap-4 mt-4">
+          <a
+            href={resumePath}
+            download="De_Guzman_Richie_Christian_Resume.pdf"
             className="group flex items-center gap-2 h-12 px-6 rounded-full bg-black text-white border border-black transition-all duration-300 hover:bg-transparent hover:text-black hover:-translate-y-1 active:translate-y-0"
           >
-            <Mail className="w-4 h-4" />
-            Let&apos;s Talk
-            <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-          </button>
+            <Download className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+            Download CV
+          </a>
 
           <button
             onClick={() => router.push("/projects")}
-            className="px-6 focus:outline-none py-3 h-12 flex items-center text-gray-500 hover:text-black transition"
+            className="group flex items-center gap-2 h-12 px-6 rounded-full border border-neutral-200 text-neutral-700 transition-all duration-300 hover:border-black hover:text-black hover:-translate-y-1 active:translate-y-0"
           >
-            View Work →
-          </button>
-
-          <button
-            onClick={() => window.open("https://github.com/rylsherdamz-rgb", "_blank")}
-            className="flex items-center gap-2 h-12 px-6 rounded-full border border-neutral-200 text-neutral-700 transition-all duration-300 hover:border-black hover:text-black hover:-translate-y-1 active:translate-y-0"
-          >
-            <Github className="w-4 h-4" />
-            GitHub
+            View Work
+            <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </button>
         </div>
 
