@@ -32,8 +32,8 @@ export default function Home() {
           techRef.current,
           projectsRef.current,
           achievementsRef.current,
-          socialRef.current,
           postsRef.current,
+          socialRef.current,
           footerRef.current,
         ],
         {
@@ -97,12 +97,12 @@ export default function Home() {
         <Achievements />
       </div>
 
-      <div ref={socialRef}>
-        <Socials />
-      </div>
-
       <div ref={postsRef}>
         <LinkedInPosts />
+      </div>
+
+      <div ref={socialRef}>
+        <Socials />
       </div>
 
       <div ref={footerRef}>
