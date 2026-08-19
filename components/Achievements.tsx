@@ -8,10 +8,12 @@ function Section({
   title,
   items,
   icon,
+  showSubtitle = true,
 }: {
   title: string
   items: typeof honors
   icon: string
+  showSubtitle?: boolean
 }) {
   return (
     <div>
@@ -61,14 +63,16 @@ function Section({
 
             <div className="mt-5">
               <h4 className="font-medium leading-snug">{item.title}</h4>
-              <p
-                className={[
-                  "mt-1.5 text-sm leading-relaxed",
-                  item.highlight ? "text-white/60" : "text-neutral-500",
-                ].join(" ")}
-              >
-                {item.subtitle}
-              </p>
+              {showSubtitle ? (
+                <p
+                  className={[
+                    "mt-1.5 text-sm leading-relaxed",
+                    item.highlight ? "text-white/60" : "text-neutral-500",
+                  ].join(" ")}
+                >
+                  {item.subtitle}
+                </p>
+              ) : null}
             </div>
           </div>
         ))}
@@ -103,7 +107,7 @@ export default function Achievements() {
         </div>
 
         <div className="space-y-12">
-          <Section title="Hackathons & Honors" items={honors} icon="mdi:trophy" />
+          <Section title="Hackathons & Honors" items={honors} icon="mdi:trophy" showSubtitle={false} />
           <Section title="Professional Certifications" items={certifications} icon="mdi:certificate" />
         </div>
 
