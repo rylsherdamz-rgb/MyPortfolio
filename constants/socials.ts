@@ -1,7 +1,7 @@
 export const socials = [
   {
     name: "GitHub",
-    url: "https://github.com/rylsherdamz-rgb?tab=overview&from=2026-01-01&to=2026-01-12",
+    url: "https://github.com/rylsherdamz-rgb",
     icon: "mdi:github", // Iconify icon
   },
   {
@@ -21,3 +21,4 @@ export const socials = [
   },
 ]
 
+export const email = "richiechristiandeguzman11@gmail.com"

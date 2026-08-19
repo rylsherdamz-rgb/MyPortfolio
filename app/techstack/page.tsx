@@ -5,7 +5,7 @@ import Footer from "@/components/Footer"
 import NavigationBar from "@/components/NavigationBar"
 import gsap from "gsap";
 
-export default function techStack() {
+export default function TechStackPage() {
 
   const navRef = useRef<HTMLDivElement>(null)
   const techRef = useRef<HTMLDivElement>(null)
@@ -30,15 +30,17 @@ export default function techStack() {
 
 
  
-  return <div className="w-full h-full bg-white ">
-    <div ref={navRef}>
-      <NavigationBar />
+  return (
+    <div className="w-full min-h-screen bg-white flex flex-col">
+      <div ref={navRef}>
+        <NavigationBar />
+      </div>
+      <div className="px-[5%] flex-1" ref={techRef}>
+        <TechStack />
+      </div>
+      <div ref={footerRef}>
+        <Footer />
+      </div>
     </div>
-    <div className="px-[5%]" ref={techRef}>
-  <TechStack />
-    </div>
-    <div ref={footerRef} >
-      <Footer />
-    </div>
-  </div>
+  )
 }

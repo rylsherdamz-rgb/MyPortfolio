@@ -4,7 +4,8 @@ import {
   Geist_Mono,
   Roboto,
   Anton,
-  Roboto_Slab
+  Roboto_Slab,
+  Roboto_Flex
 } from "next/font/google"
 import "./globals.css"
 
@@ -36,10 +37,34 @@ const anton = Anton({
   variable: "--font-anton",
 })
 
+const robotoFlex = Roboto_Flex({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-roboto-flex",
+})
+
 export const metadata: Metadata = {
-  title: "Richie Christian De Guzman",
+  title: "Richie Christian De Guzman — Full-Stack Developer, Data Analyst & Blockchain Developer",
   description:
-    "Hi I'm Richie Christian De Guzman. Full-stack web developer with 3 years of experience designing, developing, and deploying scalable web and mobile applications...",
+    "I'm Richie Christian De Guzman, a Full-Stack Developer, Data Analyst, and Blockchain Developer based in Antipolo, Philippines. I build beautiful, scalable web apps and decentralized systems.",
+  keywords: [
+    "Richie Christian De Guzman",
+    "Full-Stack Developer",
+    "Blockchain Developer",
+    "Data Analyst",
+    "Web Developer",
+    "React",
+    "Stellar",
+    "Soroban",
+    "Philippines",
+  ],
+  openGraph: {
+    title: "Richie Christian De Guzman — Full-Stack, Data & Blockchain Developer",
+    description:
+      "Full-Stack Developer, Data Analyst, and Blockchain Developer building beautiful, scalable products.",
+    type: "website",
+    locale: "en_US",
+  },
 }
 export default function RootLayout({
   children,
@@ -58,6 +83,7 @@ export default function RootLayout({
           ${roboto.variable}
           ${anton.variable}
           ${robotoSlab.variable}
+          ${robotoFlex.variable}
           antialiased
         bg-white
         `}

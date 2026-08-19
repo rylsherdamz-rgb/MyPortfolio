@@ -29,15 +29,17 @@ export default function Projects() {
   }, []);
 
 
-  return <div className="w-full bg-white relative   h-screen">
-    <div ref={navRef}>
-    <NavigationBar /> 
+  return (
+    <div className="w-full min-h-screen bg-white flex flex-col">
+      <div ref={navRef}>
+        <NavigationBar />
+      </div>
+      <div className="px-[5%] flex-1" ref={projectRef}>
+        <ProjectCarousel />
+      </div>
+      <div ref={footerRef}>
+        <Footer />
+      </div>
     </div>
-    <div className="px-[5%]" ref={projectRef}>
- <ProjectCarousel /> 
-    </div>
-    <div className="absolute bottom-0 w-full " ref={footerRef}>
-    <Footer />
-    </div>
-  </div>
+  )
 }

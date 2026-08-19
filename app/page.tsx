@@ -10,12 +10,14 @@ import RoomCanvas from "@/components/RoomCanvas"
 import HeroComponents from "@/components/HeroComponents"
 import Socials from "@/components/Social"
 import ProjectCarousel from "@/components/ProjectCarousel"
+import Achievements from "@/components/Achievements"
 
 export default function Home() {
   const navRef = useRef<HTMLDivElement>(null)
   const heroRef = useRef<HTMLDivElement>(null)
   const techRef = useRef<HTMLDivElement>(null)
   const projectsRef = useRef<HTMLDivElement>(null)
+  const achievementsRef = useRef<HTMLDivElement>(null)
   const socialRef = useRef<HTMLDivElement>(null)
   const footerRef = useRef<HTMLDivElement>(null)
 
@@ -27,6 +29,7 @@ export default function Home() {
           heroRef.current,
           techRef.current,
           projectsRef.current,
+          achievementsRef.current,
           socialRef.current,
           footerRef.current,
         ],
@@ -85,6 +88,10 @@ export default function Home() {
 
       <div ref={projectsRef}>
         <ProjectCarousel />
+      </div>
+
+      <div ref={achievementsRef}>
+        <Achievements />
       </div>
 
       <div ref={socialRef}>
