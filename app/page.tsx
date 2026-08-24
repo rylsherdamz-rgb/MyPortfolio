@@ -52,13 +52,14 @@ export default function Home() {
   return (
     <div className="w-full flex flex-col gap-y-8 bg-white">
       
-      <div ref={navRef}>
+      <div ref={navRef} className="sticky top-0 z-50">
         <NavigationBar />
       </div>
 
       <div
         ref={heroRef}
-        className="relative w-full min-h-[80vh] flex items-center px-6 md:px-12"
+        id="home"
+        className="relative flex w-full min-h-[80vh] items-center px-6 md:px-12"
       >
         <div className="z-10 w-full md:w-[60%] lg:w-[55%]">
           <HeroComponents />

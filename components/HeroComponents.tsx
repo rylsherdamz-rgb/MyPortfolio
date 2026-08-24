@@ -16,27 +16,34 @@ export default function HeroComponent() {
   }
 
   return (
-    <section className="w-full flex justify-center px-6 md:px-20 py-16 md:py-24">
-      <div className="w-full max-w-6xl flex flex-col gap-10">
+    <section className="relative w-full py-16 md:py-24">
+      {/* Ambient glows */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-24 right-[-8%] h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+        <div className="absolute bottom-[-25%] left-[-15%] h-80 w-80 rounded-full bg-neutral-200/70 blur-3xl" />
+      </div>
+
+      <div className="relative flex w-full flex-col gap-10">
         <div className="flex flex-col gap-5">
-          <p className="text-sm md:text-base uppercase tracking-widest text-gray-400">
+          <p className="text-sm uppercase tracking-widest text-neutral-500 md:text-base">
             Hi, I&apos;m Richie Christian De Guzman
           </p>
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-gray-400 text-sm md:text-base">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-500 md:text-base">
             <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4" />
+              <MapPin className="h-4 w-4" />
               <span>Antipolo, Philippines</span>
             </div>
 
-            <div className="hidden sm:block h-1 w-1 rounded-full bg-gray-300" />
+            <div className="hidden h-1 w-1 rounded-full bg-gray-300 sm:block" />
 
             <div className="flex flex-wrap gap-2">
               {roles.map((role) => (
                 <span
                   key={role}
-                  className="rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600"
+                  className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/70 px-3 py-1 text-xs font-medium text-neutral-600 backdrop-blur transition-colors hover:border-accent/40 hover:text-neutral-900"
                 >
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                   {role}
                 </span>
               ))}
@@ -45,15 +52,15 @@ export default function HeroComponent() {
 
           <h1
             style={{ fontVariationSettings: '"wdth" 135, "wght" 800' }}
-            className="font-[var(--font-roboto-flex)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight text-black max-w-4xl mt-2"
+            className="mt-2 max-w-4xl font-[var(--font-roboto-flex)] text-4xl leading-tight text-black sm:text-5xl md:text-6xl lg:text-7xl"
           >
             Crafting{" "}
-            <span className="text-gray-400">beautiful</span> and{" "}
-            <span className="text-gray-400">scalable</span> digital products —
-            from the web to the blockchain.
+            <span className="text-neutral-400">beautiful</span> and{" "}
+            <span className="text-neutral-400">scalable</span> digital
+            products — from the web to the blockchain.
           </h1>
 
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl leading-relaxed mt-2">
+          <p className="mt-2 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
             I build polished full-stack applications, analyze data for real
             insight, and ship smart contracts and decentralized apps. A
             hackathon champion, Google Cloud Arcade Facilitator, and lifelong
@@ -61,32 +68,32 @@ export default function HeroComponent() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-4 mt-4">
+        <div className="mt-4 flex flex-wrap items-center gap-4">
           <a
             href={resumePath}
             download="De_Guzman_Richie_Christian_Resume.pdf"
-            className="group flex items-center gap-2 h-12 px-6 rounded-full bg-black text-white border border-black transition-all duration-300 hover:bg-transparent hover:text-black hover:-translate-y-1 active:translate-y-0"
+            className="group flex h-12 items-center gap-2 rounded-full border border-black bg-black px-6 text-white transition-all duration-300 hover:-translate-y-1 hover:bg-transparent hover:text-black active:translate-y-0"
           >
-            <Download className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+            <Download className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
             Download CV
           </a>
 
           <button
             onClick={scrollToProjects}
-            className="group flex items-center gap-2 h-12 px-6 rounded-full border border-neutral-200 text-neutral-700 transition-all duration-300 hover:border-black hover:text-black hover:-translate-y-1 active:translate-y-0"
+            className="group flex h-12 items-center gap-2 rounded-full border border-neutral-200 px-6 text-neutral-700 transition-all duration-300 hover:-translate-y-1 hover:border-black hover:text-black active:translate-y-0"
           >
             View Work
-            <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </button>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mt-6 pt-8 border-t border-neutral-100">
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <p className="text-2xl md:text-3xl font-bold text-black font-[var(--font-roboto-flex)]">
+        <div className="mt-6 grid max-w-2xl grid-cols-2 gap-x-4 gap-y-6 border-t border-neutral-100 pt-8 sm:grid-cols-4 sm:gap-x-0">
+          {stats.map((stat, i) => (
+            <div key={stat.label} className={i > 0 ? "sm:border-l sm:border-neutral-100 sm:pl-6" : ""}>
+              <p className="font-[var(--font-roboto-flex)] text-2xl font-bold tabular-nums text-black md:text-3xl">
                 {stat.value}
               </p>
-              <p className="mt-1 text-xs md:text-sm text-gray-500 uppercase tracking-wide">
+              <p className="mt-1 text-xs uppercase tracking-wide text-gray-500 md:text-sm">
                 {stat.label}
               </p>
             </div>

@@ -3,6 +3,7 @@
 import { Icon } from "@iconify/react"
 import { Award, Sparkles } from "lucide-react"
 import { certifications, honors } from "@/constants/achievements"
+import SectionHeader from "@/components/SectionHeader"
 
 function Section({
   title,
@@ -83,28 +84,19 @@ function Section({
 
 export default function Achievements() {
   return (
-    <section className="w-full px-6 md:px-20 py-16 md:py-24">
+    <section className="w-full bg-neutral-50 px-6 py-16 md:px-20 md:py-24">
       <div className="mx-auto w-full max-w-6xl">
-        <div className="mb-12 flex flex-col gap-4">
-          <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-neutral-100">
-              <Award className="h-5 w-5 text-neutral-700" />
-            </span>
-            <p className="text-sm font-medium uppercase tracking-widest text-neutral-400">
-              Recognition & Growth
-            </p>
-          </div>
-
-          <h2 className="font-[var(--font-roboto-slab)] text-3xl font-bold tracking-tight text-black sm:text-4xl">
-            Honors, Hackathons &{" "}
-            <span className="text-neutral-400">Certifications</span>
-          </h2>
-          <p className="max-w-2xl text-neutral-600 leading-relaxed">
-            From winning my first hackathon to being selected as a Google Cloud
-            Arcade Facilitator — here&apos;s the journey that&apos;s shaped me as
-            a builder and learner.
-          </p>
-        </div>
+        <SectionHeader
+          icon={Award}
+          eyebrow="Recognition & Growth"
+          title={
+            <>
+              Honors, Hackathons &{" "}
+              <span className="text-neutral-400">Certifications</span>
+            </>
+          }
+          description="From winning my first hackathon to being selected as a Google Cloud Arcade Facilitator — here's the journey that's shaped me as a builder and learner."
+        />
 
         <div className="space-y-12">
           <Section title="Hackathons & Honors" items={honors} icon="mdi:trophy" showSubtitle={false} />
