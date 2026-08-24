@@ -43,6 +43,13 @@ export const honors: Achievement[] = [
     highlight: true,
   },
   {
+    title: "Blue Team Champion — SEEN 2026",
+    subtitle: "Cyber Rumble CTF — defensive security track",
+    year: "2026",
+    icon: "mdi:shield-crown",
+    highlight: true,
+  },
+  {
     title: "Top 10 Finalist — Agora Hackathon Philippines",
     subtitle: "ClawdBot: next-gen AI sales agent",
     year: "2026",
@@ -65,6 +72,6 @@ export const honors: Achievement[] = [
 export const stats = [
   { value: "3+", label: "Years building" },
   { value: "40+", label: "Repos shipped" },
-  { value: "4", label: "Hackathon finals" },
+  { value: "5", label: "Hackathon finals" },
   { value: "4", label: "Certifications" },
 ]
