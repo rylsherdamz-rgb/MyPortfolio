@@ -62,17 +62,17 @@ export default function CommitRail() {
   return (
     <nav
       aria-label="Section rail"
-      className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
+      className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
     >
       <div className="relative flex flex-col items-center">
-        <div className="absolute bottom-2 left-1/2 top-2 w-px -translate-x-1/2 bg-neutral-200" />
+        <div className="absolute bottom-3 left-1/2 top-3 w-[2px] -translate-x-1/2 bg-neutral-200" />
         <div
           ref={fillRef}
-          className="absolute bottom-2 left-1/2 top-2 w-px origin-top -translate-x-1/2 bg-accent"
+          className="absolute bottom-3 left-1/2 top-3 w-[2px] origin-top -translate-x-1/2 bg-accent"
           style={{ transform: "scaleY(0)" }}
         />
 
-        <ul className="relative flex flex-col gap-5">
+        <ul className="relative flex flex-col gap-4">
           {stops.map((stop) => {
             const isActive = active === stop.id
             return (
@@ -81,17 +81,17 @@ export default function CommitRail() {
                   onClick={() => jump(stop.id)}
                   aria-label={stop.label}
                   aria-current={isActive ? "true" : undefined}
-                  className="grid h-6 w-6 place-items-center"
+                  className="grid h-7 w-7 place-items-center"
                 >
                   <span
-                    className={`block rounded-full border-2 transition-all duration-300 ${
+                    className={`block h-3 w-3 border-2 transition-all duration-200 ${
                       isActive
-                        ? "h-3.5 w-3.5 border-accent bg-accent shadow-[0_0_0_4px] shadow-accent/15"
-                        : "h-2.5 w-2.5 border-neutral-300 bg-white group-hover:border-accent"
+                        ? "-rotate-45 border-[var(--line)] bg-accent shadow-[2px_2px_0_0_var(--shadow-hard)]"
+                        : "border-[var(--line)] bg-white group-hover:bg-accent/40 group-hover:-rotate-45"
                     }`}
                   />
                 </button>
-                <span className="pointer-events-none absolute right-8 whitespace-nowrap rounded-md bg-neutral-900 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-white opacity-0 transition-all duration-200 group-hover:opacity-100">
+                <span className="pointer-events-none absolute right-8 whitespace-nowrap border-2 border-[var(--line)] bg-white px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black opacity-0 shadow-[3px_3px_0_0_var(--shadow-hard)] transition-opacity duration-150 group-hover:opacity-100">
                   {stop.label}
                 </span>
               </li>

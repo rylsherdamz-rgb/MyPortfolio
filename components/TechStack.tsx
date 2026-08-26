@@ -23,7 +23,7 @@ export default function TechStack() {
           icon={Code2}
           title={
             <>
-              Tech <span className="text-neutral-400">Stack</span>
+              Tech <span className="text-accent">Stack</span>
             </>
           }
           description="The languages, frameworks, and platforms I reach for when building products end to end."
@@ -32,14 +32,14 @@ export default function TechStack() {
         <div
           data-sc-in
           data-sc-stagger="60"
-          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
           {categories.map(([category, items]) => (
             <div
               key={category}
-              className="rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-neutral-300 hover:shadow-lg"
+              className="card-hard rounded-none bg-white p-5"
             >
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-neutral-500">
+              <p className="mb-4 inline-block bg-[var(--line)] px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--background)]">
                 {labelFor(category)}
               </p>
 
@@ -47,7 +47,7 @@ export default function TechStack() {
                 {items.map(({ name, icon }) => (
                   <span
                     key={name}
-                    className="inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white px-3 py-1.5 text-sm text-neutral-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent-soft"
+                    className="inline-flex items-center gap-2 border-2 border-[var(--line)] bg-white px-2.5 py-1.5 text-xs font-semibold text-black transition-all duration-150 hover:-translate-y-0.5 hover:bg-accent hover:text-white"
                   >
                     <Icon icon={icon} className="h-4 w-4" />
                     {name}

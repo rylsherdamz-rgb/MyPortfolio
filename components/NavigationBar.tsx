@@ -5,10 +5,10 @@ import { Menu, X } from "lucide-react"
 import ThemeToggle from "@/components/ThemeToggle"
 
 const navLinks = [
-  { label: "Tech Stack", target: "tech-stack" },
-  { label: "Projects", target: "projects" },
-  { label: "Achievements", target: "achievements" },
-  { label: "LinkedIn", target: "posts" },
+  { label: "Stack", target: "tech-stack" },
+  { label: "Work", target: "projects" },
+  { label: "Honors", target: "achievements" },
+  { label: "Feed", target: "posts" },
   { label: "Connect", target: "connect" },
 ]
 
@@ -47,10 +47,7 @@ export default function NavigationBar() {
       window.scrollTo({ top: 0, behavior: "smooth" })
       return
     }
-    const el = document.getElementById(target)
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" })
-    }
+    document.getElementById(target)?.scrollIntoView({ behavior: "smooth" })
   }
 
   const handleContact = () => {
@@ -62,27 +59,26 @@ export default function NavigationBar() {
     <nav
       className={`flex w-full flex-col px-6 transition-all duration-300 md:px-20 ${
         scrolled
-          ? "border-b border-neutral-100 bg-white/85 py-3 backdrop-blur-md"
+          ? "border-b-2 border-[var(--line)] bg-[color-mix(in_oklab,var(--background)_95%,transparent)] py-3 backdrop-blur-md"
           : "bg-transparent py-5"
       }`}
     >
       <div className="flex items-center justify-between">
         <button
           onClick={() => scrollToSection("home")}
-          style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
-          className="cursor-pointer select-none font-[var(--font-roboto-slab)] text-lg font-bold text-black"
+          className="font-display cursor-pointer select-none text-xl uppercase text-black"
         >
-          rylsher<span className="text-gray-500">.dev</span>
+          rylsher<span className="text-accent">.dev</span>
         </button>
 
-        <div className="hidden items-center gap-7 text-black md:flex">
+        <div className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
             <button
               key={link.label}
               onClick={() => scrollToSection(link.target)}
-              className={`select-none cursor-pointer text-sm font-medium transition-colors ${
+              className={`select-none cursor-pointer font-mono text-xs font-semibold uppercase tracking-widest transition-colors ${
                 active === link.target
-                  ? "text-black underline decoration-accent decoration-2 underline-offset-8"
+                  ? "bg-accent px-2 py-1 text-white"
                   : "text-neutral-500 hover:text-black"
               }`}
             >
@@ -94,23 +90,26 @@ export default function NavigationBar() {
 
           <button
             onClick={handleContact}
-            className="rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition-all hover:-translate-y-0.5 btn-accent-hover active:translate-y-0"
+            className="btn-accent-hover border-2 border-[var(--line)] bg-accent px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-[3px_3px_0_0_var(--shadow-hard)] transition-transform hover:-translate-y-0.5 active:translate-y-0"
           >
             Let&apos;s Talk
           </button>
         </div>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="p-2 text-black transition rounded-full focus:outline-none hover:bg-black/10 active:scale-95 md:hidden"
-          aria-label="Toggle menu"
-        >
-          {open ? (
-            <X className="h-6 w-6 rotate-90 transition-transform" />
-          ) : (
-            <Menu className="h-6 w-6 transition-transform" />
-          )}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setOpen(!open)}
+            className="border-2 border-[var(--line)] p-2 text-black transition active:scale-95"
+            aria-label="Toggle menu"
+          >
+            {open ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </button>
+        </div>
       </div>
 
       <div
@@ -118,13 +117,15 @@ export default function NavigationBar() {
           open ? "mt-4 max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="flex flex-col gap-4 border-t pt-4">
+        <div className="flex flex-col gap-1 border-t-2 border-[var(--line)] pt-4">
           {navLinks.map((link) => (
             <button
               key={link.label}
               onClick={() => scrollToSection(link.target)}
-              className={`select-none cursor-pointer text-left text-lg font-medium transition-colors ${
-                active === link.target ? "text-black" : "text-neutral-500 hover:text-black"
+              className={`select-none cursor-pointer text-left font-mono text-sm font-semibold uppercase tracking-widest transition-colors ${
+                active === link.target
+                  ? "bg-accent px-2 py-1 text-white"
+                  : "text-neutral-600 hover:text-black"
               }`}
             >
               {link.label}
@@ -133,7 +134,7 @@ export default function NavigationBar() {
 
           <button
             onClick={handleContact}
-            className="mt-2 rounded-full bg-black px-5 py-3 text-left text-sm font-medium text-white transition-all btn-accent-hover"
+            className="btn-accent-hover mt-3 border-2 border-[var(--line)] bg-accent px-5 py-3 text-left font-mono text-xs font-bold uppercase tracking-widest text-white shadow-[3px_3px_0_0_var(--shadow-hard)]"
           >
             Let&apos;s Talk
           </button>

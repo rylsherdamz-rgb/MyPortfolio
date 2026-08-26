@@ -24,13 +24,13 @@ export default function Home() {
         aria-label="Introduction"
       >
         <div data-sc-stage className="relative overflow-hidden">
-          {/* Ambient glows */}
+          {/* Manga-print atmosphere: screentone field + speed lines */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 overflow-hidden"
           >
-            <div className="absolute -top-24 right-[-8%] h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-            <div className="absolute bottom-[-25%] left-[-15%] h-80 w-80 rounded-full bg-neutral-200/70 blur-3xl" />
+            <div className="dots-bg absolute -right-10 top-6 h-80 w-80 opacity-50 [mask-image:radial-gradient(closest-side,black,transparent)]" />
+            <div className="speedlines absolute bottom-[-2rem] left-[-4rem] h-64 w-[46rem] [mask-image:radial-gradient(120%_100%_at_20%_60%,black,transparent_70%)]" />
           </div>
 
           <div className="relative flex h-full w-full items-center px-6 md:px-12">

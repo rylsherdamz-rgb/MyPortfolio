@@ -1,19 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f5f0;
+  --foreground: #141414;
 
-  /* Accent */
-  --accent: #4f46e5;
-  --accent-soft: #eef2ff;
+  /* Accent: shu-iro vermillion */
+  --accent: #eb4b27;
+  --accent-soft: rgba(235, 75, 39, 0.09);
+
+  /* Manga-ink structure tokens */
+  --line: #141414;
+  --shadow-hard: #141414;
+  --shadow-w: 4px;
 
   /* scrollcraft tokens, rebranded light */
-  --sc-canvas: #ffffff;
+  --sc-canvas: #f7f5f0;
   --sc-surface: #ffffff;
-  --sc-ink: #171717;
-  --sc-ink-soft: #737373;
-  --sc-accent: #4f46e5;
+  --sc-ink: #141414;
+  --sc-ink-soft: #5c584f;
+  --sc-accent: #eb4b27;
   --sc-accent-ink: #ffffff;
 
   /* Fonts */
@@ -54,38 +59,83 @@ body {
   and one electric-lime accent owns the region.
 */
 [data-theme="dark"] {
-  --background: #0b0c0e;
-  --foreground: #f2f2ef;
+  --background: #101013;
+  --foreground: #f2f1ec;
 
-  --accent: #c8f04b;
-  --accent-soft: rgba(200, 240, 75, 0.12);
+  --accent: #ff5c33;
+  --accent-soft: rgba(255, 92, 51, 0.12);
 
-  --color-white: #14161b;
-  --color-black: #f2f2ef;
+  --line: #f2f1ec;
+  --shadow-hard: rgba(255, 92, 51, 0.85);
+  --shadow-w: 4px;
+
+  --color-white: #17181d;
+  --color-black: #f2f1ec;
 
   --color-gray-300: #34383f;
   --color-gray-400: #6b7078;
   --color-gray-500: #9aa0aa;
   --color-gray-600: #c3c7cf;
 
-  --color-neutral-50: #121419;
-  --color-neutral-100: #1a1d23;
-  --color-neutral-200: #262a31;
-  --color-neutral-300: #3a3f47;
-  --color-neutral-400: #858b95;
-  --color-neutral-500: #a6abb5;
-  --color-neutral-600: #c6cad2;
-  --color-neutral-700: #dde0e5;
-  --color-neutral-800: #eceef1;
-  --color-neutral-900: #f4f5f7;
-  --color-neutral-950: #060708;
+  --color-neutral-50: #14161b;
+  --color-neutral-100: #1c1e24;
+  --color-neutral-200: #282b32;
+  --color-neutral-300: #3c4048;
+  --color-neutral-400: #868c96;
+  --color-neutral-500: #a7acb6;
+  --color-neutral-600: #c7cbd3;
+  --color-neutral-700: #dee1e6;
+  --color-neutral-800: #edeff2;
+  --color-neutral-900: #f5f6f8;
+  --color-neutral-950: #08090b;
 
-  --sc-canvas: #0b0c0e;
-  --sc-surface: #14161b;
-  --sc-ink: #f2f2ef;
+  --sc-canvas: #101013;
+  --sc-surface: #17181d;
+  --sc-ink: #f2f1ec;
   --sc-ink-soft: #9aa0aa;
-  --sc-accent: #c8f04b;
-  --sc-accent-ink: #0b0c0e;
+  --sc-accent: #ff5c33;
+  --sc-accent-ink: #101013;
+}
+
+/* ------------------------------------------------ manga-ink utilities ---- */
+
+/* Screentone: classic halftone dot field */
+.dots-bg {
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--line) 55%, transparent) 1px,
+    transparent 1.4px
+  );
+  background-size: 10px 10px;
+}
+
+/* Speed lines: tapered action strokes */
+.speedlines {
+  background-image: repeating-linear-gradient(
+    100deg,
+    color-mix(in oklab, var(--line) 14%, transparent) 0 1px,
+    transparent 1px 9px
+  );
+}
+
+/* Hard offset shadow; grows on hover with a counter-pull */
+.card-hard {
+  border-width: 2px;
+  border-color: var(--line);
+  box-shadow: var(--shadow-w) var(--shadow-w) 0 0 var(--shadow-hard);
+  transition:
+    transform 220ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.card-hard:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: calc(var(--shadow-w) + 2px) calc(var(--shadow-w) + 2px) 0 0
+    var(--shadow-hard);
+}
+
+/* Display face for the poster voice */
+.font-display {
+  font-family: var(--font-anton);
+  letter-spacing: -0.01em;
 }
 
 body {

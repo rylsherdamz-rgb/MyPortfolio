@@ -5,8 +5,9 @@ import { Icon } from "@iconify/react"
 
 const pages = [
   { label: "Home", target: "home" },
-  { label: "Projects", target: "projects" },
-  { label: "Tech Stack", target: "tech-stack" },
+  { label: "Stack", target: "tech-stack" },
+  { label: "Work", target: "projects" },
+  { label: "Honors", target: "achievements" },
   { label: "Connect", target: "connect" },
 ]
 
@@ -18,38 +19,34 @@ export default function Footer() {
       window.scrollTo({ top: 0, behavior: "smooth" })
       return
     }
-    const el = document.getElementById(target)
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" })
-    }
+    document.getElementById(target)?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
-    <footer className="w-full bg-neutral-950 text-neutral-400 py-12">
-      <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row items-start justify-between gap-8">
-        <div className="flex flex-col gap-3">
-          <p
-            style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
-            className="font-[var(--font-roboto-slab)] text-[#f4f4f2] text-lg font-bold"
-          >
-            rylsher<span className="text-neutral-500">.dev</span>
+    <footer className="w-full border-t-4 border-accent bg-[#111112] text-[#a8a8b0]">
+      <div className="dots-bg pointer-events-none h-3 w-full opacity-30" />
+
+      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-10 px-6 py-14 md:flex-row">
+        <div className="flex flex-col gap-4">
+          <p className="font-display text-2xl uppercase text-[#f4f4f2]">
+            rylsher<span className="text-accent">.dev</span>
           </p>
-          <p className="text-sm leading-relaxed max-w-xs">
-            Full-Stack Developer, Data Analyst & Blockchain Developer building
-            for the web and beyond.
+          <p className="max-w-xs font-mono text-xs leading-relaxed uppercase tracking-wider">
+            Full-Stack Dev, Data Analyst &amp; Blockchain Dev building for the
+            web and beyond.
           </p>
         </div>
 
         <div className="flex flex-col gap-3">
-          <p className="text-sm font-medium uppercase tracking-widest text-neutral-500">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-[#6d6d76]">
             Pages
           </p>
-          <div className="flex flex-col gap-2 text-sm">
+          <div className="flex flex-col gap-2 font-mono text-xs font-semibold uppercase tracking-widest">
             {pages.map((page) => (
               <button
                 key={page.target}
                 onClick={() => scrollToSection(page.target)}
-                className="text-left hover:text-[#f4f4f2] transition-colors cursor-pointer"
+                className="text-left transition-colors hover:text-accent"
               >
                 {page.label}
               </button>
@@ -58,16 +55,16 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <p className="text-sm font-medium uppercase tracking-widest text-neutral-500">
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-[#6d6d76]">
             Contact
           </p>
           <a
             href={`mailto:${email}`}
-            className="text-sm hover:text-[#f4f4f2] transition-colors"
+            className="font-mono text-xs tracking-wide hover:text-accent"
           >
             {email}
           </a>
-          <div className="flex gap-3 mt-1">
+          <div className="mt-1 flex gap-2">
             {socials.map((social) => (
               <a
                 key={social.name}
@@ -75,7 +72,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="grid h-9 w-9 place-items-center rounded-lg bg-neutral-900 text-neutral-400 transition-all hover:bg-white hover:text-black"
+                className="grid h-9 w-9 place-items-center border-2 border-[#2c2c31] bg-[#17171a] text-[#a8a8b0] transition-all hover:border-accent hover:bg-accent hover:text-white"
               >
                 <Icon icon={social.icon} className="h-4 w-4" />
               </a>
@@ -84,12 +81,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 max-w-6xl px-6 border-t border-neutral-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="text-sm">
-          &copy; {year} Richie Christian De Guzman. All rights reserved.
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t-2 border-[#232327] px-6 py-6 sm:flex-row">
+        <p className="font-mono text-[10px] uppercase tracking-widest">
+          &copy; {year} Richie Christian De Guzman
         </p>
-        <p className="text-sm text-neutral-600">
-          Built with Next.js, Tailwind & a little bit of chaos.
+        <p className="font-mono text-[10px] uppercase tracking-widest text-[#5c5c64]">
+          Next.js + Tailwind + a little chaos
         </p>
       </div>
     </footer>

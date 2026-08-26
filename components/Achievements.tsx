@@ -21,46 +21,42 @@ function Section({
   return (
     <div>
       <div className="mb-6 flex items-center gap-3">
-        <span className="grid h-9 w-9 place-items-center rounded-xl bg-neutral-900 text-white">
-          <Icon icon={icon} className="h-5 w-5" />
+        <span className="grid h-9 w-9 place-items-center border-2 border-[var(--line)] bg-white shadow-[3px_3px_0_0_var(--shadow-hard)]">
+          <Icon icon={icon} className="h-5 w-5 text-black" />
         </span>
-        <h3 className="font-[var(--font-roboto-slab)] text-xl font-bold tracking-tight">
+        <h3 className="font-display text-2xl uppercase tracking-tight">
           {title}
         </h3>
       </div>
 
       <div
         {...(stagger ? { "data-sc-in": "", "data-sc-stagger": "70" } : {})}
-        className="grid gap-4 sm:grid-cols-2"
+        className="grid gap-5 sm:grid-cols-2"
       >
         {items.map((item) => (
           <div
             key={item.title}
             className={[
-              "group relative flex flex-col justify-between overflow-hidden rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1",
+              "card-hard relative flex flex-col justify-between overflow-hidden rounded-none p-5",
               item.highlight
-                ? "border-neutral-900 bg-neutral-900 text-white shadow-lg hover:shadow-xl"
-                : "border-neutral-200 bg-white text-black hover:border-neutral-400 hover:shadow-md",
+                ? "bg-accent text-white"
+                : "bg-white text-black",
             ].join(" ")}
           >
-            {item.highlight && (
-              <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10 blur-xl" />
-            )}
-
             <div className="flex items-start justify-between gap-3">
               <Icon
                 icon={item.icon}
                 className={[
                   "h-7 w-7 shrink-0",
-                  item.highlight ? "text-white/80" : "text-neutral-400",
+                  item.highlight ? "text-white" : "text-neutral-400",
                 ].join(" ")}
               />
               <span
                 className={[
-                  "rounded-full px-2.5 py-1 text-xs font-medium tracking-wide",
+                  "border px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest",
                   item.highlight
-                    ? "bg-white/15 text-white"
-                    : "bg-neutral-100 text-neutral-500",
+                    ? "border-white/60 bg-white/15 text-white"
+                    : "border-[var(--line)] bg-neutral-100 text-neutral-600",
                 ].join(" ")}
               >
                 {item.year}
@@ -68,12 +64,18 @@ function Section({
             </div>
 
             <div className="mt-5">
-              <h4 className="font-medium leading-snug">{item.title}</h4>
+              <h4
+                className={`font-display text-lg uppercase leading-snug ${
+                  item.highlight ? "" : ""
+                }`}
+              >
+                {item.title}
+              </h4>
               {showSubtitle ? (
                 <p
                   className={[
                     "mt-1.5 text-sm leading-relaxed",
-                    item.highlight ? "text-white/60" : "text-neutral-500",
+                    item.highlight ? "text-white/85" : "text-neutral-500",
                   ].join(" ")}
                 >
                   {item.subtitle}
@@ -89,7 +91,7 @@ function Section({
 
 export default function Achievements() {
   return (
-    <section className="w-full bg-neutral-50 px-6 py-16 md:px-20 md:py-24">
+    <section className="w-full border-y-2 border-[var(--line)] bg-white px-6 py-16 md:px-20 md:py-24">
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeader
           icon={Award}
@@ -118,9 +120,9 @@ export default function Achievements() {
           />
         </div>
 
-        <div className="mt-14 flex items-center justify-center gap-2 text-sm text-neutral-500">
+        <div className="mt-14 flex items-center justify-center gap-2 border-t-2 border-[var(--line)] pt-8 font-mono text-xs uppercase tracking-[0.25em] text-neutral-500">
           <Sparkles className="h-4 w-4" />
-          <span>Always learning, always shipping.</span>
+          <span>Always learning, always shipping</span>
         </div>
       </div>
     </section>
