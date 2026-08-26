@@ -64,7 +64,7 @@ export default function LinkedInPosts() {
               Latest from <span className="text-neutral-400">LinkedIn</span>
             </>
           }
-          description="Moments, milestones, and lessons from my journey — pulled live from my LinkedIn, one post at a time."
+          description="Moments, milestones, and lessons from my journey, pulled live from my LinkedIn, one post at a time."
           action={
             <div className="flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs text-neutral-500 shadow-sm">
               <span
@@ -88,7 +88,11 @@ export default function LinkedInPosts() {
           }
         />
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          data-sc-in
+          data-sc-stagger="70"
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {posts.map((post) => (
             <a
               key={post.url}

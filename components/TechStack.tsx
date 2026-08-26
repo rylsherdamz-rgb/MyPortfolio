@@ -21,7 +21,6 @@ export default function TechStack() {
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeader
           icon={Code2}
-          eyebrow="Toolbox"
           title={
             <>
               Tech <span className="text-neutral-400">Stack</span>
@@ -30,7 +29,11 @@ export default function TechStack() {
           description="The languages, frameworks, and platforms I reach for when building products end to end."
         />
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          data-sc-in
+          data-sc-stagger="60"
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {categories.map(([category, items]) => (
             <div
               key={category}

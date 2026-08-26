@@ -36,34 +36,34 @@ export const certifications: Achievement[] = [
 
 export const honors: Achievement[] = [
   {
-    title: "Champion — AWS Agentic Football Hackathon",
-    subtitle: "AWS User Group e:Novators PH — agentic AI track",
+    title: "Champion: AWS Agentic Football Hackathon",
+    subtitle: "AWS User Group e:Novators PH: agentic AI track",
     year: "2026",
     icon: "mdi:trophy",
     highlight: true,
   },
   {
-    title: "Blue Team Champion — SEEN 2026",
-    subtitle: "Cyber Rumble CTF — defensive security track",
+    title: "Blue Team Champion: SEEN 2026",
+    subtitle: "Cyber Rumble CTF: defensive security track",
     year: "2026",
     icon: "mdi:shield-crown",
     highlight: true,
   },
   {
-    title: "Top 10 Finalist — Agora Hackathon Philippines",
+    title: "Top 10 Finalist: Agora Hackathon Philippines",
     subtitle: "ClawdBot: next-gen AI sales agent",
     year: "2026",
     icon: "mdi:trophy-outline",
   },
   {
-    title: "Finalist — Cryptita Builder Showcase",
+    title: "Finalist: Cryptita Builder Showcase",
     subtitle: "Built and presented live in the showcase",
     year: "2026",
     icon: "mdi:rocket-launch",
   },
   {
-    title: "Finalist — Startup QC Student Competition",
-    subtitle: "Squad 3 — student founder track",
+    title: "Finalist: Startup QC Student Competition",
+    subtitle: "Squad 3: student founder track",
     year: "2026",
     icon: "mdi:rocket-launch",
   },

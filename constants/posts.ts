@@ -18,13 +18,13 @@ export const linkedinPosts: LinkedInPost[] = [
   {
     title: "Google Cloud Arcade Facilitator 2026 ☁️",
     excerpt:
-      "Excited to share that I've been selected as a Google Cloud Arcade Facilitator 2026 — deepening my skills in Google Cloud and helping others level up too.",
+      "Excited to share that I've been selected as a Google Cloud Arcade Facilitator 2026: deepening my skills in Google Cloud and helping others level up too.",
     date: "July 21, 2026",
     url: "https://www.linkedin.com/posts/richie-christian-de-guzman-53b015392_googlecloud-googlecloudarcade-arcadefacilitator2026-activity-7485289706025283584-TLF7",
     tags: ["GoogleCloud", "ArcadeFacilitator2026"],
   },
   {
-    title: "ClawdBot — Top 10 at Agora Hackathon Philippines 🚀",
+    title: "ClawdBot: Top 10 at Agora Hackathon Philippines 🚀",
     excerpt:
       "We built Sinta, an automated registrar powered by Agora Conversational AI and FaceIO. Voice enrollment, facial verification, and automated document requests. Top 10 finalists, one of the youngest teams there.",
     date: "May 28, 2026",
@@ -32,9 +32,9 @@ export const linkedinPosts: LinkedInPost[] = [
     tags: ["Hackathon", "Agora", "AI", "ConversationalAI"],
   },
   {
-    title: "Squad 3 — Finalist at Startup QC",
+    title: "Squad 3: Finalist at Startup QC",
     excerpt:
-      "Proud to share that our team, Squad 3, is a finalist at Startup QC and the StartupQC Student Competition — even before officially kicking off.",
+      "Proud to share that our team, Squad 3, is a finalist at Startup QC and the StartupQC Student Competition: even before officially kicking off.",
     date: "July 3, 2026",
     url: "https://www.linkedin.com/posts/richie-christian-de-guzman-53b015392_startupqc-startupqcstudent-studentfounder-activity-7478609195622354945-niao",
     tags: ["StartupQC", "StudentFounder"],
@@ -42,7 +42,7 @@ export const linkedinPosts: LinkedInPost[] = [
   {
     title: "Empowering Students with Local-First AI: Yuwi 🚀",
     excerpt:
-      "As an indie developer, I've always believed powerful study tools shouldn't be locked behind expensive subscriptions. That's why I built Yuwi — local-first AI for students.",
+      "As an indie developer, I've always believed powerful study tools shouldn't be locked behind expensive subscriptions. That's why I built Yuwi: local-first AI for students.",
     date: "April 9, 2026",
     url: "https://www.linkedin.com/posts/richie-christian-de-guzman-53b015392_indiedev-buildinpublic-edtech-activity-7447931518221676544-6FV_",
     tags: ["IndieDev", "BuildInPublic", "EdTech"],
@@ -50,7 +50,7 @@ export const linkedinPosts: LinkedInPost[] = [
   {
     title: "Google Cybersecurity Professional Certificate",
     excerpt:
-      "Earned the Google Cybersecurity Professional Certificate (v2) — strengthening my knowledge of security fundamentals, threat detection, and incident response.",
+      "Earned the Google Cybersecurity Professional Certificate (v2): strengthening my knowledge of security fundamentals, threat detection, and incident response.",
     date: "June 10, 2026",
     url: "https://www.linkedin.com/posts/richie-christian-de-guzman-53b015392_google-cybersecurity-professional-certificate-activity-7470475735523037184-fk94",
     tags: ["Cybersecurity", "Google"],

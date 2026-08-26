@@ -1,8 +1,3 @@
-"use client"
-
-import { useEffect, useRef } from "react"
-import gsap from "gsap"
-
 import NavigationBar from "@/components/NavigationBar"
 import Footer from "@/components/Footer"
 import TechStack from "@/components/TechStack"
@@ -12,103 +7,70 @@ import Socials from "@/components/Social"
 import ProjectCarousel from "@/components/ProjectCarousel"
 import Achievements from "@/components/Achievements"
 import LinkedInPosts from "@/components/LinkedInPosts"
+import CommitRail from "@/components/CommitRail"
 
 export default function Home() {
-  const navRef = useRef<HTMLDivElement>(null)
-  const heroRef = useRef<HTMLDivElement>(null)
-  const techRef = useRef<HTMLDivElement>(null)
-  const projectsRef = useRef<HTMLDivElement>(null)
-  const achievementsRef = useRef<HTMLDivElement>(null)
-  const socialRef = useRef<HTMLDivElement>(null)
-  const postsRef = useRef<HTMLDivElement>(null)
-  const footerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(
-        [
-          navRef.current,
-          heroRef.current,
-          techRef.current,
-          projectsRef.current,
-          achievementsRef.current,
-          postsRef.current,
-          socialRef.current,
-          footerRef.current,
-        ],
-        {
-          opacity: 0,
-          y: 30,
-          duration: 1,
-          ease: "power2.out",
-          stagger: 0.3,
-        }
-      )
-    })
-
-    return () => ctx.revert()
-  }, [])
-
   return (
-    <div className="w-full flex flex-col gap-y-8 bg-white">
-      
-      <div ref={navRef} className="sticky top-0 z-50">
+    <div className="flex w-full flex-col bg-white">
+      <div className="sticky top-0 z-50">
         <NavigationBar />
       </div>
 
-      <div
-        ref={heroRef}
+      {/* Act 1: the open. Pins while the introduction cues in line by line. */}
+      <section
         id="home"
-        className="relative flex w-full min-h-[80vh] items-center px-6 md:px-12"
+        data-sc-act="pin"
+        data-sc-span="1.7"
+        aria-label="Introduction"
       >
-        <div className="z-10 w-full md:w-[60%] lg:w-[55%]">
-          <HeroComponents />
-        </div>
+        <div data-sc-stage className="relative overflow-hidden">
+          {/* Ambient glows */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 overflow-hidden"
+          >
+            <div className="absolute -top-24 right-[-8%] h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+            <div className="absolute bottom-[-25%] left-[-15%] h-80 w-80 rounded-full bg-neutral-200/70 blur-3xl" />
+          </div>
 
-        <div
-          className="
-            absolute
-            z-0
-            top-1/2
-            -translate-y-1/2
-            hidden
-            md:block
-            md:right-[-10%]
-            md:w-[70%]
-            md:h-[50%]
-            lg:right-0
-            lg:w-[45%]
-            lg:h-[70%]
-            pointer-events-none
-          "
-        >
-          <RoomCanvas />
-        </div>
-      </div>
+          <div className="relative flex h-full w-full items-center px-6 md:px-12">
+            <div className="w-full md:w-[62%] lg:w-[55%]">
+              <HeroComponents />
+            </div>
 
-      <div ref={techRef} id="tech-stack" className="scroll-mt-20">
+            <div
+              aria-hidden
+              className="absolute right-[-8%] top-1/2 hidden -translate-y-1/2 md:block md:w-[52%] lg:right-[-2%] lg:w-[44%]"
+            >
+              <div data-sc-parallax="-0.05" className="h-[58vh] lg:h-[70vh]">
+                <RoomCanvas />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="tech-stack" className="scroll-mt-16">
         <TechStack />
       </div>
 
-      <div ref={projectsRef} id="projects" className="scroll-mt-20">
-        <ProjectCarousel />
-      </div>
+      <ProjectCarousel />
 
-      <div ref={achievementsRef} id="achievements" className="scroll-mt-20">
+      <div id="achievements" className="scroll-mt-16">
         <Achievements />
       </div>
 
-      <div ref={postsRef} id="posts" className="scroll-mt-20">
+      <div id="posts" className="scroll-mt-16">
         <LinkedInPosts />
       </div>
 
-      <div ref={socialRef} id="connect" className="scroll-mt-20">
+      <div id="connect" className="scroll-mt-16">
         <Socials />
       </div>
 
-      <div ref={footerRef}>
-        <Footer />
-      </div>
+      <Footer />
+
+      <CommitRail />
     </div>
   )
 }

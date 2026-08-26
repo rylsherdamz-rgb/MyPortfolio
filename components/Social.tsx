@@ -17,12 +17,16 @@ export default function Socials() {
             Connect with <span className="text-neutral-400">Me</span>
           </h2>
           <p className="max-w-xl leading-relaxed text-neutral-600">
-            Feel free to reach out on any of the platforms below — I&apos;m
+            Feel free to reach out on any of the platforms below: I&apos;m
             always open to collaborations, projects, and great conversations.
           </p>
         </div>
 
-        <div className="grid w-full max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
+        <div
+          data-sc-in
+          data-sc-stagger="70"
+          className="grid w-full max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4"
+        >
           {socials.map((social) => (
             <Link
               key={social.name}

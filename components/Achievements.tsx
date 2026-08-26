@@ -10,11 +10,13 @@ function Section({
   items,
   icon,
   showSubtitle = true,
+  stagger = false,
 }: {
   title: string
   items: typeof honors
   icon: string
   showSubtitle?: boolean
+  stagger?: boolean
 }) {
   return (
     <div>
@@ -27,7 +29,10 @@ function Section({
         </h3>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div
+        {...(stagger ? { "data-sc-in": "", "data-sc-stagger": "70" } : {})}
+        className="grid gap-4 sm:grid-cols-2"
+      >
         {items.map((item) => (
           <div
             key={item.title}
@@ -88,19 +93,29 @@ export default function Achievements() {
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeader
           icon={Award}
-          eyebrow="Recognition & Growth"
           title={
             <>
               Honors, Hackathons &{" "}
               <span className="text-neutral-400">Certifications</span>
             </>
           }
-          description="From winning my first hackathon to being selected as a Google Cloud Arcade Facilitator — here's the journey that's shaped me as a builder and learner."
+          description="From winning my first hackathon to being selected as a Google Cloud Arcade Facilitator, here's the journey that's shaped me as a builder and learner."
         />
 
         <div className="space-y-12">
-          <Section title="Hackathons & Honors" items={honors} icon="mdi:trophy" showSubtitle={false} />
-          <Section title="Professional Certifications" items={certifications} icon="mdi:certificate" />
+          <Section
+            title="Hackathons & Honors"
+            items={honors}
+            icon="mdi:trophy"
+            showSubtitle={false}
+            stagger
+          />
+          <Section
+            title="Professional Certifications"
+            items={certifications}
+            icon="mdi:certificate"
+            stagger
+          />
         </div>
 
         <div className="mt-14 flex items-center justify-center gap-2 text-sm text-neutral-500">

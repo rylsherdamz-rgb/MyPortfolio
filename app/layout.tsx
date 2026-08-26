@@ -7,7 +7,9 @@ import {
   Roboto_Slab,
   Roboto_Flex
 } from "next/font/google"
+import "./scrollcraft.css"
 import "./globals.css"
+import ScrollCraftLoader from "@/components/ScrollCraftLoader"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -88,7 +90,11 @@ export default function RootLayout({
         bg-white
         `}
       >
+        <noscript>
+          <style>{`[data-sc-cue],[data-sc-in],[data-sc-stagger]>*{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         {children}
+        <ScrollCraftLoader />
       </body>
     </html>
   )

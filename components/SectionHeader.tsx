@@ -9,7 +9,7 @@ export default function SectionHeader({
   action,
 }: {
   icon: LucideIcon
-  eyebrow: string
+  eyebrow?: string
   title: ReactNode
   description?: string
   action?: ReactNode
@@ -22,9 +22,11 @@ export default function SectionHeader({
             <span className="grid h-10 w-10 place-items-center rounded-2xl bg-neutral-900 text-white">
               <Icon className="h-5 w-5" />
             </span>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              {eyebrow}
-            </p>
+            {eyebrow ? (
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                {eyebrow}
+              </p>
+            ) : null}
           </div>
 
           <h2 className="font-[var(--font-roboto-slab)] text-3xl font-bold tracking-tight text-black sm:text-4xl">
