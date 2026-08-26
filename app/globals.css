@@ -36,6 +36,56 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--sc-canvas);
+}
+
+body {
+  background: var(--sc-canvas, var(--background));
+  color: var(--foreground);
+  font-family: var(--font-roboto);
+  /* default font */
+}
+
+/*
+  Theme: Graphite.
+  Tailwind v4 utilities resolve through runtime CSS variables, so flipping the
+  palette vars re-themes every component at once. White becomes the raised
+  surface, black becomes primary ink, neutrals step down the inverted ramp,
+  and one electric-lime accent owns the region.
+*/
+[data-theme="dark"] {
+  --background: #0b0c0e;
+  --foreground: #f2f2ef;
+
+  --accent: #c8f04b;
+  --accent-soft: rgba(200, 240, 75, 0.12);
+
+  --color-white: #14161b;
+  --color-black: #f2f2ef;
+
+  --color-gray-300: #34383f;
+  --color-gray-400: #6b7078;
+  --color-gray-500: #9aa0aa;
+  --color-gray-600: #c3c7cf;
+
+  --color-neutral-50: #121419;
+  --color-neutral-100: #1a1d23;
+  --color-neutral-200: #262a31;
+  --color-neutral-300: #3a3f47;
+  --color-neutral-400: #858b95;
+  --color-neutral-500: #a6abb5;
+  --color-neutral-600: #c6cad2;
+  --color-neutral-700: #dde0e5;
+  --color-neutral-800: #eceef1;
+  --color-neutral-900: #f4f5f7;
+  --color-neutral-950: #060708;
+
+  --sc-canvas: #0b0c0e;
+  --sc-surface: #14161b;
+  --sc-ink: #f2f2ef;
+  --sc-ink-soft: #9aa0aa;
+  --sc-accent: #c8f04b;
+  --sc-accent-ink: #0b0c0e;
 }
 
 body {
@@ -50,6 +100,15 @@ body {
   color: #ffffff;
 }
 
+/* Accent surfaces must pair with their own ink in both themes */
+.btn-accent-hover {
+  transition-property: color, background-color, border-color, transform, box-shadow;
+}
+.btn-accent-hover:hover {
+  background: var(--accent);
+  color: var(--sc-accent-ink);
+}
+
 /* Slim, unobtrusive scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -59,10 +118,10 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d4;
+  background: color-mix(in oklab, var(--foreground) 18%, transparent);
   border-radius: 999px;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--sc-canvas);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #a3a3a3;
+  background: color-mix(in oklab, var(--foreground) 32%, transparent);
 }

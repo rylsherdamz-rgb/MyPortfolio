@@ -104,7 +104,7 @@ export default function ProjectCarousel() {
                         flex items-center justify-center gap-2
                         rounded-lg bg-black px-4 py-2.5
                         text-xs font-medium text-white
-                        transition hover:bg-accent
+                        transition btn-accent-hover
                         active:scale-[0.98]
                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black
                       "

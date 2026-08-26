@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
+import ThemeToggle from "@/components/ThemeToggle"
 
 const navLinks = [
   { label: "Tech Stack", target: "tech-stack" },
@@ -89,9 +90,11 @@ export default function NavigationBar() {
             </button>
           ))}
 
+          <ThemeToggle />
+
           <button
             onClick={handleContact}
-            className="rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:bg-accent active:translate-y-0"
+            className="rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white transition-all hover:-translate-y-0.5 btn-accent-hover active:translate-y-0"
           >
             Let&apos;s Talk
           </button>
@@ -130,7 +133,7 @@ export default function NavigationBar() {
 
           <button
             onClick={handleContact}
-            className="mt-2 rounded-full bg-black px-5 py-3 text-left text-sm font-medium text-white transition-all hover:bg-accent"
+            className="mt-2 rounded-full bg-black px-5 py-3 text-left text-sm font-medium text-white transition-all btn-accent-hover"
           >
             Let&apos;s Talk
           </button>

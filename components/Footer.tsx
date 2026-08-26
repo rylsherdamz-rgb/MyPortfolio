@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="flex flex-col gap-3">
           <p
             style={{ fontVariationSettings: '"wdth" 125, "wght" 700' }}
-            className="font-[var(--font-roboto-slab)] text-white text-lg font-bold"
+            className="font-[var(--font-roboto-slab)] text-[#f4f4f2] text-lg font-bold"
           >
             rylsher<span className="text-neutral-500">.dev</span>
           </p>
@@ -49,7 +49,7 @@ export default function Footer() {
               <button
                 key={page.target}
                 onClick={() => scrollToSection(page.target)}
-                className="text-left hover:text-white transition-colors cursor-pointer"
+                className="text-left hover:text-[#f4f4f2] transition-colors cursor-pointer"
               >
                 {page.label}
               </button>
@@ -63,7 +63,7 @@ export default function Footer() {
           </p>
           <a
             href={`mailto:${email}`}
-            className="text-sm hover:text-white transition-colors"
+            className="text-sm hover:text-[#f4f4f2] transition-colors"
           >
             {email}
           </a>
