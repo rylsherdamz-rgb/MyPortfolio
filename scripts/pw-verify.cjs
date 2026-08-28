@@ -27,11 +27,6 @@ const OUT = "/tmp/pw-shots"
   // Give WebGL + GLB + texture time to render.
   await page.waitForTimeout(3500)
 
-  // Read the screen mesh debug info exposed by CameraRig.
-  const screenDebug = await page.evaluate(() => window.__screenDebug || null)
-  console.log("=== SCREEN DEBUG ===")
-  console.log(JSON.stringify(screenDebug, null, 2))
-
   // Is there a canvas mounted (the room)?
   const canvasCount = await page.locator("canvas").count()
   console.log("canvas elements:", canvasCount)
