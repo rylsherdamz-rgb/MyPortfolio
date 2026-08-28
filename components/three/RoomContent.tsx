@@ -26,16 +26,20 @@ function OnObject({
   distanceFactor = 1.4,
   className = "",
   center = true,
+  occlude = false,
 }: {
   children: React.ReactNode
   distanceFactor?: number
   className?: string
   center?: boolean
+  /** Hide behind room geometry. Costs a raycast per frame, so opt-in — enable
+   *  only where it matters (the screen), leave off for wall/window/desk panels. */
+  occlude?: boolean
 }) {
   return (
     <Html
       transform
-      occlude
+      occlude={occlude}
       center={center}
       distanceFactor={distanceFactor}
       className={className}
@@ -58,7 +62,7 @@ function OnObject({
 export function ScreenContent({ section }: { section: RoomSection }) {
   const featured = projects[0]
   return (
-    <OnObject distanceFactor={1.15}>
+    <OnObject distanceFactor={1.15} occlude>
       <div className="w-[520px] select-none rounded-md border border-white/10 bg-[#0b0e14] p-4 font-mono text-[12px] leading-relaxed text-neutral-200 shadow-2xl">
         {/* window chrome */}
         <div className="mb-3 flex items-center gap-1.5">
