@@ -62,7 +62,7 @@ export default function CommitRail() {
   return (
     <nav
       aria-label="Section rail"
-      className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
+      className="fixed right-5 top-1/2 z-40 hidden -translate-y-1/2 xl:block"
     >
       <div className="relative flex flex-col items-center">
         <div className="absolute bottom-3 left-1/2 top-3 w-[2px] -translate-x-1/2 bg-neutral-200" />
