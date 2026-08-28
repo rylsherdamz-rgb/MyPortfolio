@@ -23,7 +23,10 @@ export default function SectionDock({
   side?: "left" | "right"
   children: ReactNode
 }) {
-  const [open, setOpen] = useState(true)
+  // Collapsed by default: the monitor screen is the primary content surface, so
+  // the HTML lives behind an unobtrusive "details" tab for accessibility and
+  // deep reading without covering the dive.
+  const [open, setOpen] = useState(false)
 
   return (
     <section
