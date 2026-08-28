@@ -14,10 +14,7 @@ export default function HeroComponent() {
 
   return (
     <div className="flex w-full flex-col gap-6">
-      <div
-        data-sc-cue="0.02"
-        className="flex flex-wrap items-center gap-x-4 gap-y-3"
-      >
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
         <p className="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-neutral-600 md:text-sm">
           Hi, I&apos;m Richie Christian De Guzman
         </p>
@@ -28,18 +25,17 @@ export default function HeroComponent() {
       </div>
 
       <h1
-        data-sc-cue="0.1"
-        className="font-display mt-2 max-w-4xl text-5xl uppercase leading-[0.95] text-black sm:text-6xl md:text-7xl lg:text-8xl"
+        className="font-display mt-2 max-w-4xl text-4xl uppercase leading-[0.95] text-black sm:text-5xl md:text-6xl lg:text-7xl"
       >
         Crafting{" "}
         <span className="text-accent">beautiful</span> &amp;{" "}
-        <span className="bg-[var(--line)] px-2 text-[var(--background)]">
+        <span className="bg-[var(--line)] px-0.5 inline-flex text-[var(--background)] leading-[0.95] whitespace-nowrap rounded">
           scalable
         </span>{" "}
         digital products: from the web to the blockchain.
       </h1>
 
-      <div data-sc-cue="0.22" className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2">
         {roles.map((role, i) => (
           <span
             key={role}
@@ -54,7 +50,6 @@ export default function HeroComponent() {
       </div>
 
       <p
-        data-sc-cue="0.32"
         className="mt-1 max-w-2xl border-l-4 border-accent pl-4 text-base leading-relaxed text-gray-600 md:text-lg"
       >
         Full-stack applications, data with real insight, smart contracts and
@@ -62,10 +57,7 @@ export default function HeroComponent() {
         Facilitator. Builder of bold ideas into working products.
       </p>
 
-      <div
-        data-sc-cue="0.44"
-        className="mt-2 flex flex-wrap items-center gap-4"
-      >
+      <div className="mt-2 flex flex-wrap items-center gap-4">
         <a
           href={resumePath}
           download="De_Guzman_Richie_Christian_Resume.pdf"
@@ -84,10 +76,7 @@ export default function HeroComponent() {
         </button>
       </div>
 
-      <div
-        data-sc-cue="0.56"
-        className="mt-4 grid max-w-2xl grid-cols-2 gap-x-4 gap-y-6 pt-6 sm:grid-cols-4 sm:gap-x-0"
-      >
+      <div className="mt-2 grid max-w-2xl grid-cols-2 gap-x-4 gap-y-6 pt-4 sm:grid-cols-4 sm:gap-x-0">
         {stats.map((stat, i) => (
           <div
             key={stat.label}

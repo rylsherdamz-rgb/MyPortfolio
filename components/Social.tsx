@@ -8,8 +8,15 @@ import { ArrowRight } from "lucide-react"
 export default function Socials() {
   return (
     <section className="w-full px-6 py-16 md:px-20 md:py-24">
-      <div className="dots-bg mx-auto flex w-full max-w-6xl flex-col items-center gap-8 border-2 border-[var(--line)] bg-white p-10 shadow-[6px_6px_0_0_var(--shadow-hard)] md:p-14">
-        <div className="flex flex-col items-center gap-4 text-center">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-8 overflow-hidden border-2 border-[var(--line)] bg-white p-10 shadow-[6px_6px_0_0_var(--shadow-hard)] md:p-14">
+        {/* Decorative halftone accents, masked to the corners so they never sit
+            behind text (which caused a ghosted/overlapping look). */}
+        <div
+          aria-hidden
+          className="dots-bg pointer-events-none absolute inset-0 opacity-40 [mask-image:radial-gradient(120%_120%_at_100%_0%,black,transparent_45%)]"
+        />
+
+        <div className="relative flex flex-col items-center gap-4 text-center">
           <p className="border-2 border-[var(--line)] bg-accent px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-white">
             Let&apos;s connect
           </p>
@@ -25,7 +32,7 @@ export default function Socials() {
         <div
           data-sc-in
           data-sc-stagger="70"
-          className="grid w-full max-w-4xl grid-cols-2 gap-5 sm:grid-cols-4"
+          className="relative grid w-full max-w-4xl grid-cols-2 gap-5 sm:grid-cols-4"
         >
           {socials.map((social, i) => (
             <Link
@@ -53,7 +60,7 @@ export default function Socials() {
 
         <a
           href={`mailto:${email}`}
-          className="btn-accent-hover mt-4 inline-flex items-center gap-2 border-2 border-[var(--line)] bg-accent px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-[4px_4px_0_0_var(--shadow-hard)] transition-transform hover:-translate-y-0.5"
+          className="btn-accent-hover relative mt-4 inline-flex items-center gap-2 border-2 border-[var(--line)] bg-accent px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-[4px_4px_0_0_var(--shadow-hard)] transition-transform hover:-translate-y-0.5"
         >
           {email}
           <ArrowRight className="h-4 w-4" />
