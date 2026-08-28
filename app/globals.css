@@ -180,6 +180,17 @@ body {
   );
 }
 
+/* Screen-space vignette layered over the 3D room to draw the eye toward the
+   center (the monitor) and add cinematic depth. Theme-aware, non-interactive. */
+.room-vignette {
+  background: radial-gradient(
+    130% 100% at 50% 45%,
+    transparent 42%,
+    color-mix(in oklab, var(--sc-canvas) 30%, transparent) 74%,
+    color-mix(in oklab, var(--sc-canvas) 70%, transparent) 100%
+  );
+}
+
 /* Scroll margin utilities.
    Offsets anchor targets so smooth-scroll lands below the sticky nav
    instead of adding layout margin (which previously caused sections to

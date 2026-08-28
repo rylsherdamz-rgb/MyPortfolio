@@ -52,6 +52,17 @@ const OUT = "/tmp/pw-shots"
   console.log("=== PAGE ERRORS ===")
   console.log(pageErrors.length ? pageErrors.join("\n") : "(none)")
 
+  // Open the details drawer and screenshot it.
+  await page.evaluate(() => window.scrollTo(0, 0))
+  await page.waitForTimeout(600)
+  const detailsBtn = page.locator("button", { hasText: /details/i }).first()
+  if (await detailsBtn.count()) {
+    await detailsBtn.click()
+    await page.waitForTimeout(700)
+    await page.screenshot({ path: `${OUT}/drawer-open.png` })
+    console.log("shot", `${OUT}/drawer-open.png`)
+  }
+
   await browser.close()
 })().catch((e) => {
   console.error("PW SCRIPT FAILED:", e)

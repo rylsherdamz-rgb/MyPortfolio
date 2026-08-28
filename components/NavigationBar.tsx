@@ -60,7 +60,7 @@ export default function NavigationBar() {
       className={`flex w-full flex-col px-6 transition-all duration-300 md:px-20 ${
         scrolled
           ? "border-b-2 border-[var(--line)] bg-[color-mix(in_oklab,var(--background)_95%,transparent)] py-3 backdrop-blur-md"
-          : "bg-transparent py-5"
+          : "border-b border-[color-mix(in_oklab,var(--line)_15%,transparent)] bg-[color-mix(in_oklab,var(--background)_55%,transparent)] py-5 backdrop-blur-sm"
       }`}
     >
       <div className="flex items-center justify-between">

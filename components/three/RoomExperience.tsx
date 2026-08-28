@@ -154,6 +154,9 @@ export default function RoomExperience() {
         />
         <AdaptiveDpr pixelated />
       </Canvas>
+
+      {/* Cinematic vignette to focus the eye on the monitor and add depth. */}
+      <div aria-hidden className="room-vignette absolute inset-0" />
     </div>
   )
 }

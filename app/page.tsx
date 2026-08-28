@@ -1,69 +1,81 @@
+"use client"
+
 import NavigationBar from "@/components/NavigationBar"
-import Footer from "@/components/Footer"
 import TechStack from "@/components/TechStack"
-import HeroComponents from "@/components/HeroComponents"
 import Socials from "@/components/Social"
 import ProjectCarousel from "@/components/ProjectCarousel"
 import Achievements from "@/components/Achievements"
 import LinkedInPosts from "@/components/LinkedInPosts"
-import CommitRail from "@/components/CommitRail"
-import SectionDock from "@/components/SectionDock"
+import HeroOverlay from "@/components/HeroOverlay"
+import RoomHUD, { type HudSection } from "@/components/RoomHUD"
 
+/**
+ * The room IS the site. A persistent 3D room (rendered by RoomExperience in the
+ * layout) shows each section's content on the monitor as the camera dives in on
+ * scroll. This page provides:
+ *   - full-height scroll spacers (one per section) that drive the camera dive,
+ *   - a designed hero overlay for the opening,
+ *   - a fixed HUD (progress rail + details drawer) for navigation and deep
+ *     reading — no content veils the 3D room unless the drawer is opened.
+ */
 export default function Home() {
+  const sections: HudSection[] = [
+    {
+      id: "home",
+      label: "Home",
+      content: (
+        <div className="p-6 md:p-8">
+          <p className="mb-3 inline-block bg-[var(--line)] px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--background)]">
+            About
+          </p>
+          <h3 className="font-display text-3xl uppercase leading-none text-[var(--foreground)]">
+            Richie Christian De Guzman
+          </h3>
+          <p className="mt-4 leading-relaxed text-neutral-600">
+            Full-Stack Developer, Data Analyst, and Blockchain Developer based
+            in Antipolo, Philippines. I turn bold ideas into working products —
+            full-stack apps, data with real insight, smart contracts, and
+            decentralized systems. Hackathon champion and Google Cloud Arcade
+            Facilitator.
+          </p>
+          <p className="mt-4 font-mono text-xs uppercase tracking-widest text-neutral-500">
+            Use the rail on the right, or scroll, to tour the workstation. Each
+            section renders live on the monitor.
+          </p>
+        </div>
+      ),
+    },
+    { id: "tech-stack", label: "Stack", content: <TechStack /> },
+    { id: "projects", label: "Work", content: <ProjectCarousel /> },
+    { id: "achievements", label: "Honors", content: <Achievements /> },
+    { id: "posts", label: "Feed", content: <LinkedInPosts /> },
+    { id: "connect", label: "Connect", content: <Socials /> },
+  ]
+
   return (
     <div className="relative z-10 flex w-full flex-col">
-      <div className="sticky top-0 z-50">
+      <div className="fixed inset-x-0 top-0 z-40">
         <NavigationBar />
       </div>
 
-      {/* HOME — the monitor screen shows whoami/stats. Intro docked right so the
-          screen (front-left in the room) stays clear. */}
-      <section
-        id="home"
-        className="relative flex min-h-screen w-full items-center"
-        aria-label="Introduction"
-      >
-        <div className="pointer-events-none flex w-full justify-end px-4 md:px-8">
-          <div className="pointer-events-auto w-full max-w-md lg:max-w-lg">
-            <div className="rounded-none border-2 border-[var(--line)] room-glass p-6 shadow-[6px_6px_0_0_var(--shadow-hard)] md:p-7">
-              <HeroComponents />
-            </div>
-            <div className="mt-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
-              <span className="inline-block h-3 w-3 animate-bounce border-b-2 border-r-2 border-accent [transform:rotate(45deg)]" />
-              Scroll — content lives on the room
-            </div>
-          </div>
-        </div>
+      {/* HOME — hero overlay over the establishing room shot. */}
+      <section id="home" className="relative h-screen w-full">
+        <HeroOverlay />
       </section>
 
-      {/* TECH STACK — screen lists the stack, desk holds chips. Dock right. */}
-      <SectionDock id="tech-stack" eyebrow="Tech Stack" side="right">
-        <TechStack />
-      </SectionDock>
+      {/* Scroll spacers: each drives the camera to the matching object. They are
+          intentionally empty so the monitor content stays the focus; the full
+          HTML lives in the HUD drawer. Labelled for accessibility + anchors. */}
+      {sections.slice(1).map((s) => (
+        <section
+          key={s.id}
+          id={s.id}
+          className="h-screen w-full"
+          aria-label={s.label}
+        />
+      ))}
 
-      {/* PROJECTS — screen shows the git log; poster shows featured. Dock right. */}
-      <SectionDock id="projects" eyebrow="Projects" side="right">
-        <ProjectCarousel />
-      </SectionDock>
-
-      {/* ACHIEVEMENTS — the wall poster + screen log. Dock right. */}
-      <SectionDock id="achievements" eyebrow="Honors" side="right">
-        <Achievements />
-      </SectionDock>
-
-      {/* FEED — the window streams posts (right side of room) → dock left. */}
-      <SectionDock id="posts" eyebrow="Feed" side="left">
-        <LinkedInPosts />
-      </SectionDock>
-
-      {/* CONNECT — the lamp glows with social links. Dock right. */}
-      <SectionDock id="connect" eyebrow="Connect" side="right">
-        <Socials />
-      </SectionDock>
-
-      <Footer />
-
-      <CommitRail />
+      <RoomHUD sections={sections} />
     </div>
   )
 }
