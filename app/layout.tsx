@@ -10,7 +10,6 @@ import {
 import "./scrollcraft.css"
 import "./globals.css"
 import ScrollCraftLoader from "@/components/ScrollCraftLoader"
-import RoomExperience from "@/components/three/RoomExperience"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -93,12 +92,12 @@ export default function RootLayout({
           ${robotoSlab.variable}
           ${robotoFlex.variable}
           antialiased
+        bg-white
         `}
       >
         <noscript>
           <style>{`[data-sc-cue],[data-sc-in],[data-sc-stagger]>*{opacity:1!important;transform:none!important}`}</style>
         </noscript>
-        <RoomExperience />
         {children}
         <ScrollCraftLoader />
       </body>

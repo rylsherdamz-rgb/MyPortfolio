@@ -91,7 +91,7 @@ function Section({
 
 export default function Achievements() {
   return (
-    <section className="w-full px-6 py-16 md:px-20 md:py-24">
+    <section className="w-full border-y-2 border-[var(--line)] bg-white px-6 py-16 md:px-20 md:py-24">
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeader
           icon={Award}

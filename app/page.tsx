@@ -1,65 +1,72 @@
 import NavigationBar from "@/components/NavigationBar"
 import Footer from "@/components/Footer"
 import TechStack from "@/components/TechStack"
+import RoomCanvas from "@/components/RoomCanvas"
 import HeroComponents from "@/components/HeroComponents"
 import Socials from "@/components/Social"
 import ProjectCarousel from "@/components/ProjectCarousel"
 import Achievements from "@/components/Achievements"
 import LinkedInPosts from "@/components/LinkedInPosts"
 import CommitRail from "@/components/CommitRail"
-import SectionDock from "@/components/SectionDock"
 
 export default function Home() {
   return (
-    <div className="relative z-10 flex w-full flex-col">
+    <div className="flex w-full flex-col bg-white">
       <div className="sticky top-0 z-50">
         <NavigationBar />
       </div>
 
-      {/* HOME — the monitor screen shows whoami/stats. Intro docked right so the
-          screen (front-left in the room) stays clear. */}
+      {/* Act 1: the open. Pins while the introduction cues in line by line. */}
       <section
         id="home"
-        className="relative flex min-h-screen w-full items-center"
+        data-sc-act="pin"
+        data-sc-span="1.7"
         aria-label="Introduction"
       >
-        <div className="pointer-events-none flex w-full justify-end px-4 md:px-8">
-          <div className="pointer-events-auto w-full max-w-md lg:max-w-lg">
-            <div className="rounded-none border-2 border-[var(--line)] room-glass p-6 shadow-[6px_6px_0_0_var(--shadow-hard)] md:p-7">
+        <div data-sc-stage className="relative overflow-hidden">
+          {/* Manga-print atmosphere: screentone field + speed lines */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 overflow-hidden"
+          >
+            <div className="dots-bg absolute -right-10 top-6 h-80 w-80 opacity-50 [mask-image:radial-gradient(closest-side,black,transparent)]" />
+            <div className="speedlines absolute bottom-[-2rem] left-[-4rem] h-64 w-[46rem] [mask-image:radial-gradient(120%_100%_at_20%_60%,black,transparent_70%)]" />
+          </div>
+
+          <div className="relative flex h-full w-full items-center px-6 md:px-12">
+            <div className="w-full md:w-[62%] lg:w-[55%]">
               <HeroComponents />
             </div>
-            <div className="mt-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
-              <span className="inline-block h-3 w-3 animate-bounce border-b-2 border-r-2 border-accent [transform:rotate(45deg)]" />
-              Scroll — content lives on the room
+
+            <div
+              aria-hidden
+              className="absolute right-[-8%] top-1/2 hidden -translate-y-1/2 md:block md:w-[52%] lg:right-[-2%] lg:w-[44%]"
+            >
+              <div data-sc-parallax="-0.05" className="h-[58vh] lg:h-[70vh]">
+                <RoomCanvas />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* TECH STACK — screen lists the stack, desk holds chips. Dock right. */}
-      <SectionDock id="tech-stack" eyebrow="Tech Stack" side="right">
+      <div id="tech-stack" className="scroll-mt-16">
         <TechStack />
-      </SectionDock>
+      </div>
 
-      {/* PROJECTS — screen shows the git log; poster shows featured. Dock right. */}
-      <SectionDock id="projects" eyebrow="Projects" side="right">
-        <ProjectCarousel />
-      </SectionDock>
+      <ProjectCarousel />
 
-      {/* ACHIEVEMENTS — the wall poster + screen log. Dock right. */}
-      <SectionDock id="achievements" eyebrow="Honors" side="right">
+      <div id="achievements" className="scroll-mt-16">
         <Achievements />
-      </SectionDock>
+      </div>
 
-      {/* FEED — the window streams posts (right side of room) → dock left. */}
-      <SectionDock id="posts" eyebrow="Feed" side="left">
+      <div id="posts" className="scroll-mt-16">
         <LinkedInPosts />
-      </SectionDock>
+      </div>
 
-      {/* CONNECT — the lamp glows with social links. Dock right. */}
-      <SectionDock id="connect" eyebrow="Connect" side="right">
+      <div id="connect" className="scroll-mt-16">
         <Socials />
-      </SectionDock>
+      </div>
 
       <Footer />
 
