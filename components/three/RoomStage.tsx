@@ -1,7 +1,7 @@
 "use client"
 
 import * as THREE from "three"
-import React, { forwardRef } from "react"
+import React, { useRef, type ReactNode } from "react"
 import { useGLTF } from "@react-three/drei"
 import { ThreeElements } from "@react-three/fiber"
 import { GLTF } from "three-stdlib"
@@ -32,21 +32,43 @@ type GLTFResult = GLTF & {
 }
 
 /**
- * The room model. The monitor's screen mesh is textured with a live
- * CanvasTexture (`screenTexture`) so the section content is PHYSICALLY the
- * display surface — it lights up via emissiveMap and reacts to scene lighting.
- *
- * A ref is forwarded to the actual screen mesh so the camera can read its real
- * world transform (position + normal) and dive straight into it — no eyeballed
- * offsets.
+ * Content slots the room exposes. Each maps to a physical object in the scene;
+ * the parent renders content INTO these anchors so it lives on the object
+ * (a screen UI on the monitor, a poster image on the wall, a feed in the
+ * window, etc.). Every anchor is a group already transformed to sit flush on
+ * its surface, so children just use small local offsets.
  */
-export const RoomStageModel = forwardRef<
-  THREE.Mesh,
-  ThreeElements["group"] & { screenTexture?: THREE.CanvasTexture | null }
->(function RoomStageModel({ screenTexture, ...props }, screenRef) {
+export type RoomSlots = {
+  /** On the monitor's screen plane, facing the viewer. */
+  screen?: ReactNode
+  /** On the wall poster. */
+  poster?: ReactNode
+  /** In the window opening. */
+  window?: ReactNode
+  /** Floating just above the desk / books. */
+  desk?: ReactNode
+  /** By the paper lamp. */
+  lamp?: ReactNode
+}
+
+/**
+ * The room model with content anchor groups layered onto its key objects.
+ *
+ * Anchor transforms are derived from each mesh's own placement (position +
+ * baked rotation) and then nudged so an attached plane/Html sits just in front
+ * of the physical surface. These were tuned against the GLB; adjust the small
+ * offsets here if a panel floats off its object.
+ */
+export function RoomStageModel({
+  slots,
+  screenOn = true,
+  ...props
+}: ThreeElements["group"] & { slots?: RoomSlots; screenOn?: boolean }) {
   const { nodes, materials } = useGLTF(
     "/models/oproom.glb"
   ) as unknown as GLTFResult
+
+  const screenMat = useRef<THREE.MeshStandardMaterial>(null)
 
   return (
     <group {...props} dispose={null}>
@@ -83,10 +105,9 @@ export const RoomStageModel = forwardRef<
         scale={1.218}
       />
 
-      {/* THE DISPLAY. The section content lives here as the mesh's own texture
-          (map + emissiveMap), so it is literally the screen surface. */}
+      {/* Monitor screen mesh. We swap in an emissive material so the screen
+          reads as "on", and anchor the live UI just in front of it. */}
       <mesh
-        ref={screenRef}
         castShadow
         receiveShadow
         geometry={nodes.Monoblock_Screen_0.geometry}
@@ -94,25 +115,27 @@ export const RoomStageModel = forwardRef<
         rotation={[-Math.PI / 2, 0, 0.07]}
         scale={0.571}
       >
-        {screenTexture ? (
-          <meshStandardMaterial
-            map={screenTexture}
-            emissive={"#ffffff"}
-            emissiveMap={screenTexture}
-            emissiveIntensity={0.85}
-            roughness={0.32}
-            metalness={0.0}
-            toneMapped={false}
-          />
-        ) : (
-          <meshStandardMaterial
-            color="#0b0e14"
-            emissive="#12233b"
-            emissiveIntensity={0.4}
-            roughness={0.35}
-          />
-        )}
+        <meshStandardMaterial
+          ref={screenMat}
+          color={screenOn ? "#0b0e14" : "#05070a"}
+          emissive={screenOn ? "#12233b" : "#000000"}
+          emissiveIntensity={screenOn ? 0.6 : 0}
+          roughness={0.35}
+          metalness={0.1}
+        />
       </mesh>
+
+      {/* SCREEN CONTENT ANCHOR.
+          The screen mesh faces roughly toward the room front-left. This group
+          is placed at the screen and rotated to lie flat against its face so an
+          Html/plane child appears printed on the display. */}
+      <group
+        name="anchor-screen"
+        position={[-1.16, 1.72, 0.16]}
+        rotation={[0, 0.62, 0.07]}
+      >
+        {slots?.screen}
+      </group>
 
       <mesh
         castShadow
@@ -134,6 +157,12 @@ export const RoomStageModel = forwardRef<
         scale={0.194}
       />
 
+      {/* LAMP ANCHOR — content sits beside the paper lamp, camera-facing. */}
+      <group name="anchor-lamp" position={[-0.9, 1.7, 1.08]}>
+        {slots?.lamp}
+      </group>
+
+      {/* Window + baked "outside light". */}
       <mesh
         castShadow
         receiveShadow
@@ -143,6 +172,16 @@ export const RoomStageModel = forwardRef<
         scale={[0.578, 1.104, 1.87]}
       />
 
+      {/* WINDOW ANCHOR — content in the window opening, facing into the room. */}
+      <group
+        name="anchor-window"
+        position={[0.9, 1.62, -1.5]}
+        rotation={[0, Math.PI, 0]}
+      >
+        {slots?.window}
+      </group>
+
+      {/* Poster frame. */}
       <mesh
         castShadow
         receiveShadow
@@ -153,6 +192,11 @@ export const RoomStageModel = forwardRef<
         scale={0.32}
       />
 
+      {/* POSTER ANCHOR — content printed on the wall poster, facing the room. */}
+      <group name="anchor-poster" position={[-0.368, 2.203, -1.27]}>
+        {slots?.poster}
+      </group>
+
       <mesh
         castShadow
         receiveShadow
@@ -162,8 +206,13 @@ export const RoomStageModel = forwardRef<
         rotation={[0, 0, -Math.PI / 2]}
         scale={[1.177, 0.85, 1.177]}
       />
+
+      {/* DESK ANCHOR — content floats just above the desk / books. */}
+      <group name="anchor-desk" position={[0.35, 1.25, 0.5]}>
+        {slots?.desk}
+      </group>
     </group>
   )
-})
+}
 
 useGLTF.preload("/models/oproom.glb")

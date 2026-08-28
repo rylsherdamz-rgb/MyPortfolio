@@ -1,8 +1,7 @@
 "use client"
 
 import { Canvas } from "@react-three/fiber"
-import { Suspense, useState, useCallback, useRef } from "react"
-import * as THREE from "three"
+import { Suspense, useState, useCallback } from "react"
 import {
   Environment,
   AdaptiveDpr,
@@ -12,7 +11,14 @@ import {
 } from "@react-three/drei"
 import { RoomStageModel } from "./RoomStage"
 import CameraRig from "./CameraRig"
-import { useScreenTexture, type RoomSection } from "./useScreenTexture"
+import {
+  ScreenContent,
+  PosterContent,
+  WindowContent,
+  DeskContent,
+  LampContent,
+  type RoomSection,
+} from "./RoomContent"
 import {
   usePrefersReducedMotion,
   useMounted,
@@ -21,47 +27,50 @@ import {
 } from "./use3D"
 
 /**
- * The room with the live display. The screen texture is painted for the active
- * section and applied to the real screen mesh; the mesh ref is handed to the
- * CameraRig so it can dive straight into the display.
+ * The living room world, with real portfolio content printed onto its objects.
+ * A gentle Float keeps it breathing. The `section` prop selects what the
+ * monitor screen displays.
  */
 function RoomWorld({
   reducedMotion,
   section,
-  screenRef,
 }: {
   reducedMotion: boolean
   section: RoomSection
-  screenRef: React.RefObject<THREE.Mesh | null>
 }) {
-  const screenTexture = useScreenTexture(section)
   return (
     <Float
-      speed={reducedMotion ? 0 : 0.5}
-      rotationIntensity={reducedMotion ? 0 : 0.04}
-      floatIntensity={reducedMotion ? 0 : 0.12}
+      speed={reducedMotion ? 0 : 0.6}
+      rotationIntensity={reducedMotion ? 0 : 0.05}
+      floatIntensity={reducedMotion ? 0 : 0.18}
     >
       <RoomStageModel
-        ref={screenRef}
         scale={2.3}
         position={[0, -0.9, 0]}
-        screenTexture={screenTexture}
+        slots={{
+          screen: <ScreenContent section={section} />,
+          poster: <PosterContent index={section === "projects" ? 1 : 0} />,
+          window: <WindowContent />,
+          desk: <DeskContent />,
+          lamp: <LampContent />,
+        }}
       />
     </Float>
   )
 }
 
 /**
- * RoomExperience — the site lives INSIDE the monitor.
+ * RoomExperience — the site IS the room.
  *
- * A single fixed, full-viewport WebGL stage renders the 3D room. The active
- * section's content is painted onto the monitor's actual screen surface (a
- * CanvasTexture used as map + emissiveMap), and a scroll-driven CameraRig dives
- * the camera INTO the screen until the display fills the viewport, pulling back
- * to reveal the room for the opening and closing sections.
+ * One fixed, full-viewport WebGL stage renders the 3D room with the portfolio's
+ * real content printed onto its objects: the monitor screen shows a live
+ * desktop for the active section, the wall poster shows the featured project,
+ * the window streams the feed, the desk holds tech chips, and the lamp holds
+ * the connect links. A scroll-driven CameraRig pushes the camera in on whichever
+ * object owns the current section.
  *
- * Layer is fixed + pointer-events-none so page scroll (which drives the dive)
- * is never blocked. Client-gated; low-power/reduced-motion safe.
+ * The layer is fixed and mostly non-interactive so it never blocks page scroll;
+ * only opted-in links (e.g. the lamp's socials) capture clicks.
  */
 export default function RoomExperience() {
   const reducedMotion = usePrefersReducedMotion()
@@ -69,7 +78,6 @@ export default function RoomExperience() {
   const palette = useThreePalette()
   const lowPower = useIsLowPower()
   const [section, setSection] = useState<RoomSection>("home")
-  const screenRef = useRef<THREE.Mesh | null>(null)
 
   const handleSection = useCallback((s: RoomSection) => setSection(s), [])
 
@@ -80,6 +88,8 @@ export default function RoomExperience() {
       ? "radial-gradient(120% 120% at 70% 20%, #16171d 0%, #0b0c0f 60%, #08090b 100%)"
       : "radial-gradient(120% 120% at 70% 20%, #fbfaf6 0%, #f3f1ea 55%, #ece9e0 100%)"
 
+  // Low-power / small touch devices: skip heavy always-on WebGL, keep a themed
+  // backdrop so the HTML content sections still read as the site.
   if (lowPower) {
     return (
       <div
@@ -96,7 +106,7 @@ export default function RoomExperience() {
       style={{ background: bg }}
     >
       <Canvas
-        camera={{ position: [6, 4, 6], fov: 45, near: 0.05, far: 100 }}
+        camera={{ position: [12, 6, 12], fov: 42 }}
         dpr={[1, 1.75]}
         shadows
         gl={{
@@ -106,7 +116,7 @@ export default function RoomExperience() {
         }}
         style={{ background: "transparent" }}
       >
-        <ambientLight intensity={palette.theme === "dark" ? 0.55 : 0.85} />
+        <ambientLight intensity={palette.theme === "dark" ? 0.5 : 0.8} />
         <directionalLight
           position={[6, 9, 6]}
           intensity={1.05}
@@ -117,7 +127,7 @@ export default function RoomExperience() {
         <directionalLight position={[-6, 3, -6]} intensity={0.35} />
         <pointLight
           position={[-4, 3, 4]}
-          intensity={0.6}
+          intensity={0.7}
           color={palette.accent}
           distance={22}
         />
@@ -128,16 +138,12 @@ export default function RoomExperience() {
           fallback={
             <Html center>
               <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
-                Booting the display…
+                Entering the room…
               </span>
             </Html>
           }
         >
-          <RoomWorld
-            reducedMotion={reducedMotion}
-            section={section}
-            screenRef={screenRef}
-          />
+          <RoomWorld reducedMotion={reducedMotion} section={section} />
           <ContactShadows
             position={[0, -1.5, 0]}
             opacity={palette.theme === "dark" ? 0.4 : 0.55}
@@ -147,11 +153,7 @@ export default function RoomExperience() {
           />
         </Suspense>
 
-        <CameraRig
-          screenRef={screenRef}
-          reducedMotion={reducedMotion}
-          onSection={handleSection}
-        />
+        <CameraRig reducedMotion={reducedMotion} onSection={handleSection} />
         <AdaptiveDpr pixelated />
       </Canvas>
     </div>

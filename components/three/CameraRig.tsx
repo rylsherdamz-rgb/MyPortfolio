@@ -1,54 +1,38 @@
 "use client"
 
-import { useRef, type RefObject } from "react"
+import { useRef } from "react"
 import { useFrame, useThree } from "@react-three/fiber"
 import * as THREE from "three"
-import type { RoomSection } from "./useScreenTexture"
-
-/** Ordered sections the scroll maps across. */
-export const SECTIONS: RoomSection[] = [
-  "home",
-  "tech-stack",
-  "projects",
-  "achievements",
-  "posts",
-  "connect",
-]
+import type { RoomSection } from "./RoomContent"
 
 /**
- * The dive plan per section, expressed relative to the SCREEN's real world
- * transform (read from the mesh at runtime, so nothing is eyeballed):
+ * Per-section camera focus. Each section frames a specific room OBJECT (whose
+ * content is printed on it), so the camera pushes in on the thing you're
+ * reading — the screen for home/tech/projects, the poster, the window, the
+ * lamp. `target` is the object's world position; `offset` is where the camera
+ * sits relative to that target (a close, slightly-orbited vantage).
  *
- *  - `dist`    how far in front of the screen the camera sits, along the
- *              screen's normal. Small = deep inside the monitor (screen fills
- *              the viewport); large = pulled back to see the room.
- *  - `lateral` sideways slide across the screen face (screen-space X), so we
- *              can drift over the content instead of a dead-straight push.
- *  - `lift`    vertical slide across the screen face (screen-space Y).
- *  - `roomBias` 0 = look straight at the screen; 1 = blend the look-at toward
- *              the room center so context sections reveal the room.
+ * World positions account for the room group (scale 2.3, position y -0.9).
  */
-type Dive = {
+type Focus = {
   section: RoomSection
-  dist: number
-  lateral: number
-  lift: number
-  roomBias: number
+  target: [number, number, number]
+  offset: [number, number, number]
 }
 
-export const DIVES: Dive[] = [
-  // Home — pulled back to establish the room + desk, screen visible ahead.
-  { section: "home", dist: 6.5, lateral: 0.0, lift: 0.3, roomBias: 0.5 },
-  // Tech — approach the display.
-  { section: "tech-stack", dist: 4.2, lateral: 0.0, lift: 0.1, roomBias: 0.15 },
-  // Projects — screen fills the viewport (dist ~= halfH/tan(fov/2) ≈ 3.1).
-  { section: "projects", dist: 3.1, lateral: 0.0, lift: 0.0, roomBias: 0.0 },
-  // Achievements — still filling the screen, tiny drift.
-  { section: "achievements", dist: 3.2, lateral: 0.1, lift: 0.0, roomBias: 0.0 },
-  // Feed — reading the feed on the display.
-  { section: "posts", dist: 3.3, lateral: -0.05, lift: 0.0, roomBias: 0.05 },
-  // Connect — pull back out to the whole room to close.
-  { section: "connect", dist: 7.5, lateral: 0.0, lift: 0.6, roomBias: 0.6 },
+export const FOCI: Focus[] = [
+  // Home — the monitor screen (whoami / stats).
+  { section: "home", target: [-2.67, 3.06, 0.37], offset: [3.6, 1.4, 4.8] },
+  // Tech Stack — closer on the screen (stack listing) + desk chips.
+  { section: "tech-stack", target: [-2.4, 2.8, 0.6], offset: [2.8, 1.2, 4.2] },
+  // Projects — the screen git log, angled to catch the poster too.
+  { section: "projects", target: [-1.9, 3.4, -0.9], offset: [4.2, 1.0, 4.4] },
+  // Achievements — the wall poster (featured work).
+  { section: "achievements", target: [-0.85, 4.17, -2.9], offset: [3.4, 0.6, 4.6] },
+  // Feed — the window (posts stream).
+  { section: "posts", target: [2.07, 2.83, -3.45], offset: [-3.8, 1.2, 4.4] },
+  // Connect — the paper lamp (social links glow).
+  { section: "connect", target: [-2.07, 3.01, 2.48], offset: [3.2, 1.0, 4.2] },
 ]
 
 function scrollToSegment(progress: number, count: number) {
@@ -62,115 +46,71 @@ function ease(t: number) {
   return t * t * (3 - 2 * t)
 }
 
-const ROOM_CENTER = new THREE.Vector3(0, 2.6, 0)
-
 /**
- * Drives the camera to DIVE INTO the monitor screen based on scroll. It reads
- * the screen mesh's live world matrix each frame to get the screen's center,
- * its outward normal, and its up/right axes, then positions the camera in
- * front of the screen at a scroll-controlled distance so the display fills the
- * viewport for the "inside" sections and pulls back to the room for context.
- *
- * Reports the active section via onSection so the screen texture updates.
+ * Drives the camera to focus the active section's room object based on page
+ * scroll, and reports the active section (for lighting the right screen
+ * content) via onSection. Critically-damped follow with idle drift + pointer
+ * parallax so the room feels alive; frozen for reduced motion.
  */
 export default function CameraRig({
-  screenRef,
   reducedMotion,
   onSection,
 }: {
-  screenRef: RefObject<THREE.Mesh | null>
   reducedMotion: boolean
   onSection?: (s: RoomSection) => void
 }) {
   const { camera } = useThree()
 
-  const screenPos = useRef(new THREE.Vector3())
-  const screenQuat = useRef(new THREE.Quaternion())
-  const screenScale = useRef(new THREE.Vector3())
-  const normal = useRef(new THREE.Vector3())
-  const right = useRef(new THREE.Vector3())
-  const up = useRef(new THREE.Vector3())
-
-  const desiredPos = useRef(new THREE.Vector3(6, 4, 6))
-  const desiredLook = useRef(new THREE.Vector3(0, 2.6, 0))
-  const currentLook = useRef(new THREE.Vector3(0, 2.6, 0))
+  const desiredPos = useRef(new THREE.Vector3(...FOCI[0].offset))
+  const desiredTarget = useRef(new THREE.Vector3(...FOCI[0].target))
+  const currentTarget = useRef(new THREE.Vector3(...FOCI[0].target))
+  const tA = useRef(new THREE.Vector3())
+  const tB = useRef(new THREE.Vector3())
+  const oA = useRef(new THREE.Vector3())
+  const oB = useRef(new THREE.Vector3())
   const lastSection = useRef<RoomSection>("home")
 
   useFrame((state, delta) => {
-    const mesh = screenRef.current
-    if (!mesh) return
-
-    // Live world transform of the actual screen mesh.
-    mesh.updateWorldMatrix(true, false)
-    mesh.matrixWorld.decompose(
-      screenPos.current,
-      screenQuat.current,
-      screenScale.current
-    )
-
-    // MEASURED (via Playwright __screenDebug): the screen geometry is flat in
-    // local X (bbox x=0), so the display face lies in the local Y–Z plane. Its
-    // outward normal is local +X (axisDotToRoom.px≈0.99 toward the room), up is
-    // local Y, and right is local Z.
-    normal.current.set(1, 0, 0).applyQuaternion(screenQuat.current).normalize()
-    up.current.set(0, 1, 0).applyQuaternion(screenQuat.current).normalize()
-    right.current.set(0, 0, 1).applyQuaternion(screenQuat.current).normalize()
-
-    // Ensure the normal points toward the room (roughly +X/+Z, away from wall).
-    // The desk faces into the room; if the normal points the wrong way, flip it
-    // so "in front of the screen" is on the room side.
-    if (normal.current.dot(ROOM_CENTER.clone().sub(screenPos.current)) < 0) {
-      normal.current.multiplyScalar(-1)
-    }
-
-    // Scroll → which dive we're between.
     const scrollY = window.scrollY || 0
     const maxScroll =
       document.documentElement.scrollHeight - window.innerHeight || 1
     const progress = THREE.MathUtils.clamp(scrollY / maxScroll, 0, 1)
-    const { i, t } = scrollToSegment(progress, DIVES.length)
+
+    const { i, t } = scrollToSegment(progress, FOCI.length)
     const et = ease(t)
-    const a = DIVES[i]
-    const b = DIVES[i + 1]
 
-    const dist = THREE.MathUtils.lerp(a.dist, b.dist, et)
-    const lateral = THREE.MathUtils.lerp(a.lateral, b.lateral, et)
-    const lift = THREE.MathUtils.lerp(a.lift, b.lift, et)
-    const roomBias = THREE.MathUtils.lerp(a.roomBias, b.roomBias, et)
+    const a = FOCI[i]
+    const b = FOCI[i + 1]
 
-    // Report active section for the screen texture.
+    // Report the nearer section so the screen shows matching content.
     const activeSection = et < 0.5 ? a.section : b.section
     if (activeSection !== lastSection.current) {
       lastSection.current = activeSection
       onSection?.(activeSection)
     }
 
-    // Camera position: start at the screen center, move OUT along the normal by
-    // `dist`, then slide across the face by lateral/lift.
-    desiredPos.current
-      .copy(screenPos.current)
-      .addScaledVector(normal.current, dist)
-      .addScaledVector(right.current, lateral)
-      .addScaledVector(up.current, lift)
+    // Interpolate the look-at target (the object) and the camera vantage.
+    tA.current.set(...a.target)
+    tB.current.set(...b.target)
+    desiredTarget.current.copy(tA.current).lerp(tB.current, et)
 
-    // Look target: blend between the screen center (dive) and room center
-    // (context) by roomBias.
-    desiredLook.current
-      .copy(screenPos.current)
-      .lerp(ROOM_CENTER, roomBias)
+    // Camera position = target + interpolated offset.
+    oA.current.set(a.target[0] + a.offset[0], a.target[1] + a.offset[1], a.target[2] + a.offset[2])
+    oB.current.set(b.target[0] + b.offset[0], b.target[1] + b.offset[1], b.target[2] + b.offset[2])
+    desiredPos.current.copy(oA.current).lerp(oB.current, et)
 
     if (!reducedMotion) {
       const time = state.clock.getElapsedTime()
-      // Tiny idle breathing + pointer parallax on the face plane.
-      desiredPos.current
-        .addScaledVector(right.current, Math.sin(time * 0.4) * 0.05 + state.pointer.x * 0.18)
-        .addScaledVector(up.current, Math.sin(time * 0.5) * 0.04 + state.pointer.y * 0.12)
+      desiredPos.current.x += Math.sin(time * 0.3) * 0.18
+      desiredPos.current.y += Math.sin(time * 0.4) * 0.12
+      desiredPos.current.x += state.pointer.x * 0.5
+      desiredPos.current.y += state.pointer.y * 0.35
     }
 
-    const k = 1 - Math.pow(reducedMotion ? 0.0001 : 0.0025, delta)
-    camera.position.lerp(desiredPos.current, k)
-    currentLook.current.lerp(desiredLook.current, k)
-    camera.lookAt(currentLook.current)
+    const lerpAmount = 1 - Math.pow(reducedMotion ? 0.0001 : 0.0022, delta)
+    camera.position.lerp(desiredPos.current, lerpAmount)
+    currentTarget.current.lerp(desiredTarget.current, lerpAmount)
+    camera.lookAt(currentTarget.current)
   })
 
   return null
