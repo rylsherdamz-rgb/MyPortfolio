@@ -45,7 +45,9 @@ html {
 }
 
 body {
-  background: var(--sc-canvas, var(--background));
+  /* Transparent so the fixed -z-10 WebGL background layer (SceneBackground)
+     shows through. The page base color lives on <html> (var(--sc-canvas)). */
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-roboto);
   /* default font */
@@ -139,7 +141,7 @@ body {
 }
 
 body {
-  background: var(--sc-canvas, var(--background));
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-roboto);
   /* default font */
@@ -148,6 +150,42 @@ body {
 ::selection {
   background: var(--accent);
   color: #ffffff;
+}
+
+/* ------------------------------------------- room-overlay utilities ------ */
+/*
+  The whole site sits over a persistent live 3D room. These utilities let a
+  surface read as a translucent pane floating in that world: enough backdrop
+  blur + tint for text contrast, while the room still shows through. Theme
+  tokens keep it readable in both light and dark.
+*/
+.room-glass {
+  background: color-mix(in oklab, var(--background) 72%, transparent);
+  backdrop-filter: blur(12px) saturate(1.05);
+  -webkit-backdrop-filter: blur(12px) saturate(1.05);
+}
+.room-glass-strong {
+  background: color-mix(in oklab, var(--background) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+}
+/* A soft vignette that darkens/lightens behind a section band so overlaid
+   text stays legible against a busy part of the room. */
+.room-scrim {
+  background: radial-gradient(
+    120% 140% at 50% 40%,
+    color-mix(in oklab, var(--background) 55%, transparent) 0%,
+    color-mix(in oklab, var(--background) 20%, transparent) 70%,
+    transparent 100%
+  );
+}
+
+/* Scroll margin utilities.
+   Offsets anchor targets so smooth-scroll lands below the sticky nav
+   instead of adding layout margin (which previously caused sections to
+   overlap the pinned nav and each other). */
+.scroll-mt-16 {
+  scroll-margin-top: 5.5rem; /* ~88px: sticky nav height + breathing room */
 }
 
 /* Accent surfaces must pair with their own ink in both themes */
