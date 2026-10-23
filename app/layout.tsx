@@ -1,4 +1,5 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
+import { socials } from "@/constants/socials"
 import {
   Geist,
   Geist_Mono,
@@ -45,28 +46,119 @@ const robotoFlex = Roboto_Flex({
   variable: "--font-roboto-flex",
 })
 
+const siteUrl = "https://rylsher.dev"
+const siteName = "Richie Christian De Guzman"
+const siteTitle =
+  "Richie Christian De Guzman — Full-Stack Developer, Data Analyst & Blockchain Developer"
+const siteDescription =
+  "Richie Christian De Guzman is a Full-Stack Developer, Data Analyst, and Blockchain Developer from Antipolo, Philippines. AWS hackathon champion, Google Cloud Arcade Facilitator, and part of PH100 2026, building scalable web apps and decentralized systems."
+
 export const metadata: Metadata = {
-  title: "Richie Christian De Guzman — Full-Stack Developer, Data Analyst & Blockchain Developer",
-  description:
-    "I'm Richie Christian De Guzman, a Full-Stack Developer, Data Analyst, and Blockchain Developer based in Antipolo, Philippines. I build beautiful, scalable web apps and decentralized systems.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteTitle,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
+  applicationName: siteName,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  category: "technology",
   keywords: [
     "Richie Christian De Guzman",
+    "Richie De Guzman",
+    "PH100 2026",
+    "PH100",
     "Full-Stack Developer",
+    "Full-Stack Developer Philippines",
     "Blockchain Developer",
+    "Blockchain Developer Philippines",
     "Data Analyst",
     "Web Developer",
+    "Next.js Developer",
     "React",
+    "TypeScript",
     "Stellar",
     "Soroban",
+    "Web3",
+    "Hackathon Champion",
+    "Google Cloud Arcade Facilitator",
+    "Antipolo",
     "Philippines",
   ],
-  openGraph: {
-    title: "Richie Christian De Guzman — Full-Stack, Data & Blockchain Developer",
-    description:
-      "Full-Stack Developer, Data Analyst, and Blockchain Developer building beautiful, scalable products.",
-    type: "website",
-    locale: "en_US",
+  alternates: {
+    canonical: "/",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    url: siteUrl,
+    siteName,
+    type: "profile",
+    firstName: "Richie Christian",
+    lastName: "De Guzman",
+    locale: "en_PH",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    creator: "@ChichiCode0",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f5f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#101013" },
+  ],
+}
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteName,
+  url: siteUrl,
+  jobTitle: "Full-Stack Developer, Data Analyst & Blockchain Developer",
+  description: siteDescription,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Antipolo",
+    addressCountry: "PH",
+  },
+  award: [
+    "PH100 2026",
+    "Champion: AWS Agentic Football Hackathon 2026",
+    "Blue Team Champion: SEEN 2026 Cyber Rumble CTF",
+    "Google Cloud Arcade Facilitator 2026",
+  ],
+  knowsAbout: [
+    "Full-Stack Development",
+    "Data Analysis",
+    "Blockchain",
+    "Smart Contracts",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Stellar",
+    "Soroban",
+  ],
+  sameAs: socials.map((s) => s.url),
 }
 export default function RootLayout({
   children,
@@ -95,6 +187,10 @@ export default function RootLayout({
         bg-white
         `}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <noscript>
           <style>{`[data-sc-cue],[data-sc-in],[data-sc-stagger]>*{opacity:1!important;transform:none!important}`}</style>
         </noscript>
