@@ -2,6 +2,7 @@
 
 import { socials, email } from "@/constants/socials"
 import { Icon } from "@iconify/react"
+import LogoMark from "@/components/LogoMark"
 import { usePathname } from "next/navigation"
 
 const pages = [
@@ -35,8 +36,11 @@ export default function Footer() {
 
       <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-10 px-6 py-14 md:flex-row">
         <div className="flex flex-col gap-4">
-          <p className="font-display text-2xl uppercase text-[#f4f4f2]">
-            rylsher<span className="text-accent">.dev</span>
+          <p className="font-display flex items-center gap-3 text-2xl uppercase text-[#f4f4f2]">
+            <LogoMark className="h-8 w-8 shrink-0" ink="#f4f4f2" />
+            <span>
+              rylsher<span className="text-accent">.dev</span>
+            </span>
           </p>
           <p className="max-w-xs font-mono text-xs leading-relaxed uppercase tracking-wider">
             Full-Stack Dev, Data Analyst &amp; Blockchain Dev building for the

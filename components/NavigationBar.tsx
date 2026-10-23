@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import ThemeToggle from "@/components/ThemeToggle"
+import LogoMark from "@/components/LogoMark"
 
 const navLinks = [
   { label: "Stack", target: "tech-stack" },
@@ -76,9 +77,11 @@ export default function NavigationBar() {
       <div className="flex items-center justify-between">
         <button
           onClick={() => scrollToSection("home")}
-          className="font-display cursor-pointer select-none text-xl uppercase text-black"
+          aria-label="rylsher.dev, back to top"
+          className="font-display flex cursor-pointer select-none items-center gap-2.5 text-xl uppercase text-black"
         >
-          rylsher<span className="text-accent">.dev</span>
+          <LogoMark className="h-7 w-7 shrink-0" />
+          <span>rylsher<span className="text-accent">.dev</span></span>
         </button>
 
         <div className="hidden items-center gap-6 md:flex">
