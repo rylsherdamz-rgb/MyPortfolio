@@ -80,20 +80,22 @@ export default async function AppPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Screenshots: scrolls sideways inside its own strip, never the page */}
+        {/* Screenshots: scrolls sideways inside its own strip, never the page.
+            Size lives on the <li>: scrollcraft.css sets an unlayered
+            img { max-width: 100% } that beats Tailwind max-w-* on the img. */}
         {app.screenshots.length > 0 ? (
           <section aria-label={`${app.name} screenshots`} className="mt-14">
-            <ul className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 md:-mx-12 md:px-12">
+            <ul className="-mx-6 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-6 md:-mx-12 md:scroll-px-12 md:px-12">
               {app.screenshots.map((shot, i) => (
-                <li key={shot.src} className="shrink-0 snap-start">
+                <li key={shot.src} className="w-[34vw] max-w-[150px] shrink-0 snap-start">
                   <Image
                     src={shot.src}
                     alt={shot.alt}
-                    width={1116}
-                    height={2232}
+                    width={540}
+                    height={1080}
                     priority={i < 2}
-                    sizes="(min-width: 479px) 220px, 46vw"
-                    className="h-auto w-[46vw] max-w-[220px] border-2 border-[var(--line)] bg-white shadow-[4px_4px_0_0_var(--shadow-hard)]"
+                    sizes="(min-width: 640px) 150px, 34vw"
+                    className="h-auto w-full border-2 border-[var(--line)] bg-white shadow-[4px_4px_0_0_var(--shadow-hard)]"
                   />
                 </li>
               ))}
