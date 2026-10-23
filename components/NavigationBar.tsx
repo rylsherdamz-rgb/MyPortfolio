@@ -1,12 +1,14 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import ThemeToggle from "@/components/ThemeToggle"
 
 const navLinks = [
   { label: "Stack", target: "tech-stack" },
   { label: "Work", target: "projects" },
+  { label: "Apps", target: "apps" },
   { label: "Honors", target: "achievements" },
   { label: "Feed", target: "posts" },
   { label: "Connect", target: "connect" },
@@ -16,6 +18,8 @@ export default function NavigationBar() {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState("home")
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -43,6 +47,11 @@ export default function NavigationBar() {
 
   const scrollToSection = (target: string) => {
     setOpen(false)
+    // Section ids only exist on the home page; elsewhere, go there first.
+    if (pathname !== "/") {
+      router.push(target === "home" ? "/" : `/#${target}`)
+      return
+    }
     if (target === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" })
       return

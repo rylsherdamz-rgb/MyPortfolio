@@ -2,19 +2,27 @@
 
 import { socials, email } from "@/constants/socials"
 import { Icon } from "@iconify/react"
+import { usePathname, useRouter } from "next/navigation"
 
 const pages = [
   { label: "Home", target: "home" },
   { label: "Stack", target: "tech-stack" },
   { label: "Work", target: "projects" },
+  { label: "Apps", target: "apps" },
   { label: "Honors", target: "achievements" },
   { label: "Connect", target: "connect" },
 ]
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const pathname = usePathname()
+  const router = useRouter()
 
   const scrollToSection = (target: string) => {
+    if (pathname !== "/") {
+      router.push(target === "home" ? "/" : `/#${target}`)
+      return
+    }
     if (target === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" })
       return
