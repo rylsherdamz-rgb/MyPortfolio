@@ -20,11 +20,14 @@ export default function LegalPage({
   title,
   intro,
   sections,
+  updated = app.policyUpdated,
 }: {
   app: PublishedApp
   eyebrow: string
   title: string
   intro?: string
+  // ISO date shown as "Last updated"
+  updated?: string
   sections: PolicySection[]
 }) {
   return (
@@ -54,7 +57,7 @@ export default function LegalPage({
             {title}
           </h1>
           <p className="font-mono text-xs uppercase tracking-widest text-neutral-500">
-            Last updated {formatDate(app.policyUpdated)}
+            Last updated {formatDate(updated)}
           </p>
           {intro ? <p className="leading-relaxed text-neutral-600">{intro}</p> : null}
         </header>

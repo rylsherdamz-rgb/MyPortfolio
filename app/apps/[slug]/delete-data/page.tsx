@@ -30,7 +30,7 @@ export default async function DeleteDataPage({ params }: Props) {
       app={app}
       eyebrow="Data deletion"
       title={`Delete your ${app.name} data`}
-      intro={`${app.name} keeps your data on your device. Here's how to remove all of it.`}
+      intro={app.deletion.intro}
       sections={[
         { heading: "Delete everything in the app", bullets: app.deletion.steps },
         { heading: "Good to know", bullets: app.deletion.notes },

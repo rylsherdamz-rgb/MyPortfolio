@@ -5,6 +5,7 @@ export const developer = {
   name: "Richie Christian De Guzman",
   email,
   location: "Antipolo, Rizal, Philippines",
+  twitter: "@ChichiCode0",
 }
 
 export type PolicySection = {
@@ -35,7 +36,8 @@ export type PublishedApp = {
   policyUpdated: string
   privacy: PolicySection[]
   extraTerms?: PolicySection[]
-  deletion: { steps: string[]; notes: string[] }
+  // intro is app-specific on purpose: Google reviews the deletion page.
+  deletion: { intro: string; steps: string[]; notes: string[] }
 }
 
 export const apps: PublishedApp[] = [
@@ -206,6 +208,7 @@ export const apps: PublishedApp[] = [
       },
     ],
     deletion: {
+      intro: "Seishin keeps your data on your device. Here's how to remove all of it.",
       steps: [
         "Open Seishin and go to the Settings tab.",
         "Tap Factory reset.",
@@ -240,13 +243,23 @@ export function pageMetadata(title: string, description: string, path: string): 
       locale: "en_PH",
       images: [shareImage],
     },
-    twitter: { title, description, images: [shareImage.url] },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      creator: developer.twitter,
+      images: [shareImage.url],
+    },
   }
 }
 
 export function getApp(slug: string) {
   return apps.find((a) => a.slug === slug)
 }
+
+// Bump when the shared terms below change; the terms page shows the later of
+// this and the app's own policyUpdated.
+export const baseTermsUpdated = "2026-10-22"
 
 export function baseTerms(app: PublishedApp): PolicySection[] {
   return [

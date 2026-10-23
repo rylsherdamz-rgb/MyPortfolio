@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import LegalPage from "@/components/apps/LegalPage"
-import { apps, baseTerms, getApp, pageMetadata } from "@/constants/apps"
+import { apps, baseTerms, baseTermsUpdated, getApp, pageMetadata } from "@/constants/apps"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -27,6 +27,8 @@ export default async function TermsPage({ params }: Props) {
       eyebrow="Terms of use"
       title={`${app.name} Terms of Use`}
       sections={baseTerms(app)}
+      // ISO dates compare correctly as strings
+      updated={[app.policyUpdated, baseTermsUpdated].sort().at(-1)}
     />
   )
 }

@@ -92,7 +92,7 @@ export default async function AppPage({ params }: Props) {
                     width={1116}
                     height={2232}
                     priority={i < 2}
-                    sizes="(min-width: 768px) 220px, 46vw"
+                    sizes="(min-width: 479px) 220px, 46vw"
                     className="h-auto w-[46vw] max-w-[220px] border-2 border-[var(--line)] bg-white shadow-[4px_4px_0_0_var(--shadow-hard)]"
                   />
                 </li>
