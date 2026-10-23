@@ -1,10 +1,11 @@
 import Image from "next/image"
-import Link from "next/link"
 import { ArrowUpRight, Smartphone } from "lucide-react"
 import SectionHeader from "@/components/SectionHeader"
 import StoreButton from "@/components/apps/StoreButton"
 import { apps, type PublishedApp } from "@/constants/apps"
 
+// Plain <a>, not <Link>: these render on the home page, and ScrollCraft only
+// mounts once per document, so a client-side round trip would blank the home page.
 export function AppCard({ app }: { app: PublishedApp }) {
   return (
     <article className="flex flex-col gap-5 border-2 border-[var(--line)] bg-white p-6 shadow-[5px_5px_0_0_var(--shadow-hard)]">
@@ -37,19 +38,19 @@ export function AppCard({ app }: { app: PublishedApp }) {
 
       <div className="mt-auto flex flex-wrap items-center gap-3">
         <StoreButton app={app} />
-        <Link
+        <a
           href={`/apps/${app.slug}`}
           className="inline-flex items-center gap-1.5 border-2 border-[var(--line)] bg-white px-4 py-3 font-mono text-xs font-bold uppercase tracking-widest text-black transition-transform hover:-translate-y-0.5"
         >
           Details <ArrowUpRight className="h-3.5 w-3.5" />
-        </Link>
+        </a>
       </div>
 
       <div className="flex flex-wrap gap-x-4 gap-y-1 border-t-2 border-[var(--line)] pt-4 font-mono text-[10px] font-semibold uppercase tracking-widest text-neutral-500">
-        <Link href={`/apps/${app.slug}/privacy`} className="hover:text-accent">Privacy</Link>
-        <Link href={`/apps/${app.slug}/terms`} className="hover:text-accent">Terms</Link>
-        <Link href={`/apps/${app.slug}/delete-data`} className="hover:text-accent">Delete data</Link>
-        <Link href={`/apps/${app.slug}#support`} className="hover:text-accent">Support</Link>
+        <a href={`/apps/${app.slug}/privacy`} className="hover:text-accent">Privacy</a>
+        <a href={`/apps/${app.slug}/terms`} className="hover:text-accent">Terms</a>
+        <a href={`/apps/${app.slug}/delete-data`} className="hover:text-accent">Delete data</a>
+        <a href={`/apps/${app.slug}#support`} className="hover:text-accent">Support</a>
       </div>
     </article>
   )
@@ -68,12 +69,14 @@ export default function PublishedApps() {
         }
         description="Mobile apps I publish, each with its own privacy policy, terms and support page."
         action={
-          <Link
+          // Full load on purpose; see AppCard.
+          // eslint-disable-next-line @next/next/no-html-link-for-pages
+          <a
             href="/apps"
             className="inline-flex items-center gap-1.5 border-2 border-[var(--line)] bg-white px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-widest text-black shadow-[3px_3px_0_0_var(--shadow-hard)]"
           >
             All apps <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
+          </a>
         }
       />
 

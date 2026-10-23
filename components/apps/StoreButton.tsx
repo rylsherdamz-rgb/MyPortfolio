@@ -19,7 +19,7 @@ export default function StoreButton({ app }: { app: PublishedApp }) {
 
   if (app.status !== "live") {
     return (
-      <span aria-disabled className={`${base} cursor-default bg-white text-neutral-500`}>
+      <span role="link" aria-disabled="true" className={`${base} cursor-default bg-white text-neutral-500`}>
         {body}
       </span>
     )

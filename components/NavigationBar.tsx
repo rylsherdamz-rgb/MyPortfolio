@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import ThemeToggle from "@/components/ThemeToggle"
 
@@ -19,7 +19,6 @@ export default function NavigationBar() {
   const [active, setActive] = useState("home")
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
-  const router = useRouter()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -48,8 +47,10 @@ export default function NavigationBar() {
   const scrollToSection = (target: string) => {
     setOpen(false)
     // Section ids only exist on the home page; elsewhere, go there first.
+    // A full load, not router.push: ScrollCraft mounts once per document, so a
+    // client-rendered home page would keep its reveal sections hidden.
     if (pathname !== "/") {
-      router.push(target === "home" ? "/" : `/#${target}`)
+      window.location.assign(target === "home" ? "/" : `/#${target}`)
       return
     }
     if (target === "home") {

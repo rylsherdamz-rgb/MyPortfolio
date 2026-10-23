@@ -1,14 +1,13 @@
 import type { Metadata } from "next"
 import AppShell from "@/components/apps/AppShell"
 import { AppCard } from "@/components/PublishedApps"
-import { apps } from "@/constants/apps"
+import { apps, pageMetadata } from "@/constants/apps"
 
-export const metadata: Metadata = {
-  title: "Apps",
-  description:
-    "Mobile apps by Richie Christian De Guzman on Google Play, with their privacy policies, terms and support.",
-  alternates: { canonical: "/apps" },
-}
+export const metadata: Metadata = pageMetadata(
+  "Apps",
+  "Mobile apps by Richie Christian De Guzman on Google Play, with their privacy policies, terms and support.",
+  "/apps"
+)
 
 export default function AppsPage() {
   return (

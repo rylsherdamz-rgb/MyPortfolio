@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import { ArrowLeft, Github, Mail, ShieldCheck, FileText, Trash2 } from "lucide-react"
 import AppShell from "@/components/apps/AppShell"
 import StoreButton from "@/components/apps/StoreButton"
-import { apps, developer, getApp } from "@/constants/apps"
+import { apps, developer, getApp, pageMetadata } from "@/constants/apps"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -18,12 +18,7 @@ export const dynamicParams = false
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const app = getApp((await params).slug)
   if (!app) return {}
-  return {
-    title: `${app.name} for Android`,
-    description: app.tagline,
-    alternates: { canonical: `/apps/${app.slug}` },
-    openGraph: { title: app.name, description: app.tagline, images: [app.icon] },
-  }
+  return pageMetadata(`${app.name} for Android`, app.tagline, `/apps/${app.slug}`)
 }
 
 const legalLinks = [

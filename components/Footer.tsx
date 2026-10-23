@@ -2,7 +2,7 @@
 
 import { socials, email } from "@/constants/socials"
 import { Icon } from "@iconify/react"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 const pages = [
   { label: "Home", target: "home" },
@@ -16,11 +16,10 @@ const pages = [
 export default function Footer() {
   const year = new Date().getFullYear()
   const pathname = usePathname()
-  const router = useRouter()
 
   const scrollToSection = (target: string) => {
     if (pathname !== "/") {
-      router.push(target === "home" ? "/" : `/#${target}`)
+      window.location.assign(target === "home" ? "/" : `/#${target}`)
       return
     }
     if (target === "home") {

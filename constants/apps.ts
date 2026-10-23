@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { email } from "@/constants/socials"
 
 export const developer = {
@@ -219,6 +220,29 @@ export const apps: PublishedApp[] = [
     },
   },
 ]
+
+// Next replaces the root openGraph/twitter objects wholesale, so every /apps page
+// sets its own, including the image (the generated app/opengraph-image is only
+// attached automatically when a page doesn't set openGraph).
+const shareImage = { url: "/opengraph-image", width: 1200, height: 630 }
+
+export function pageMetadata(title: string, description: string, path: string): Metadata {
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      title,
+      description,
+      url: path,
+      siteName: developer.name,
+      type: "website",
+      locale: "en_PH",
+      images: [shareImage],
+    },
+    twitter: { title, description, images: [shareImage.url] },
+  }
+}
 
 export function getApp(slug: string) {
   return apps.find((a) => a.slug === slug)

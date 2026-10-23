@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import LegalPage from "@/components/apps/LegalPage"
-import { apps, getApp } from "@/constants/apps"
+import { apps, getApp, pageMetadata } from "@/constants/apps"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -14,11 +14,11 @@ export const dynamicParams = false
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const app = getApp((await params).slug)
   if (!app) return {}
-  return {
-    title: `Delete your ${app.name} data`,
-    description: `How to delete all data stored by ${app.name}.`,
-    alternates: { canonical: `/apps/${app.slug}/delete-data` },
-  }
+  return pageMetadata(
+    `Delete your ${app.name} data`,
+    `How to delete all data stored by ${app.name}.`,
+    `/apps/${app.slug}/delete-data`
+  )
 }
 
 export default async function DeleteDataPage({ params }: Props) {

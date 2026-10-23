@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import LegalPage from "@/components/apps/LegalPage"
-import { apps, getApp } from "@/constants/apps"
+import { apps, getApp, pageMetadata } from "@/constants/apps"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -14,11 +14,7 @@ export const dynamicParams = false
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const app = getApp((await params).slug)
   if (!app) return {}
-  return {
-    title: `${app.name} Privacy Policy`,
-    description: `How ${app.name} handles your data.`,
-    alternates: { canonical: `/apps/${app.slug}/privacy` },
-  }
+  return pageMetadata(`${app.name} Privacy Policy`, `How ${app.name} handles your data.`, `/apps/${app.slug}/privacy`)
 }
 
 export default async function PrivacyPage({ params }: Props) {
