@@ -6,6 +6,7 @@ const stops = [
   { id: "home", label: "start" },
   { id: "tech-stack", label: "stack" },
   { id: "projects", label: "work" },
+  { id: "apps", label: "apps" },
   { id: "achievements", label: "honors" },
   { id: "posts", label: "feed" },
   { id: "connect", label: "connect" },

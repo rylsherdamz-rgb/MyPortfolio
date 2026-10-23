@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .ink { fill: #141414; }
+    @media (prefers-color-scheme: dark) { .ink { fill: #f2f1ec; } }
+  </style>
+  <rect class="ink" x="8" y="8" width="54" height="54"/>
+  <rect class="ink" x="2" y="2" width="54" height="54"/>
+  <rect x="6" y="6" width="46" height="46" fill="#eb4b27"/>
+  <path fill="#ffffff" fill-rule="evenodd" d="M16 13H35.5Q44 13 44 21.5Q44 28 39 30.5L45 47H35.5L30.5 32.5H25V47H16ZM25 20.5V25.5H33Q35.5 25.5 35.5 23Q35.5 20.5 33 20.5Z"/>
+</svg>

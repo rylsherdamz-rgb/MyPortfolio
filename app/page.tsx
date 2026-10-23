@@ -7,6 +7,7 @@ import ProjectCarousel from "@/components/ProjectCarousel"
 import Achievements from "@/components/Achievements"
 import LinkedInPosts from "@/components/LinkedInPosts"
 import CommitRail from "@/components/CommitRail"
+import PublishedApps from "@/components/PublishedApps"
 
 export default function Home() {
   return (
@@ -44,6 +45,10 @@ export default function Home() {
       </div>
 
       <ProjectCarousel />
+
+      <div id="apps" className="scroll-mt-16">
+        <PublishedApps />
+      </div>
 
       <div id="achievements" className="scroll-mt-16">
         <Achievements />

@@ -1,0 +1,40 @@
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import LegalPage from "@/components/apps/LegalPage"
+import { apps, getApp, pageMetadata } from "@/constants/apps"
+
+type Props = { params: Promise<{ slug: string }> }
+
+export function generateStaticParams() {
+  return apps.map((a) => ({ slug: a.slug }))
+}
+
+export const dynamicParams = false
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const app = getApp((await params).slug)
+  if (!app) return {}
+  return pageMetadata(
+    `Delete your ${app.name} data`,
+    `How to delete all data stored by ${app.name}.`,
+    `/apps/${app.slug}/delete-data`
+  )
+}
+
+export default async function DeleteDataPage({ params }: Props) {
+  const app = getApp((await params).slug)
+  if (!app) notFound()
+
+  return (
+    <LegalPage
+      app={app}
+      eyebrow="Data deletion"
+      title={`Delete your ${app.name} data`}
+      intro={app.deletion.intro}
+      sections={[
+        { heading: "Delete everything in the app", bullets: app.deletion.steps },
+        { heading: "Good to know", bullets: app.deletion.notes },
+      ]}
+    />
+  )
+}

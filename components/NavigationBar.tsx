@@ -1,12 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import ThemeToggle from "@/components/ThemeToggle"
+import LogoMark from "@/components/LogoMark"
 
 const navLinks = [
   { label: "Stack", target: "tech-stack" },
   { label: "Work", target: "projects" },
+  { label: "Apps", target: "apps" },
   { label: "Honors", target: "achievements" },
   { label: "Feed", target: "posts" },
   { label: "Connect", target: "connect" },
@@ -16,6 +19,7 @@ export default function NavigationBar() {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState("home")
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -43,6 +47,13 @@ export default function NavigationBar() {
 
   const scrollToSection = (target: string) => {
     setOpen(false)
+    // Section ids only exist on the home page; elsewhere, go there first.
+    // A full load, not router.push: ScrollCraft mounts once per document, so a
+    // client-rendered home page would keep its reveal sections hidden.
+    if (pathname !== "/") {
+      window.location.assign(target === "home" ? "/" : `/#${target}`)
+      return
+    }
     if (target === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" })
       return
@@ -66,9 +77,11 @@ export default function NavigationBar() {
       <div className="flex items-center justify-between">
         <button
           onClick={() => scrollToSection("home")}
-          className="font-display cursor-pointer select-none text-xl uppercase text-black"
+          aria-label="rylsher.dev, back to top"
+          className="font-display flex cursor-pointer select-none items-center gap-2.5 text-xl uppercase text-black"
         >
-          rylsher<span className="text-accent">.dev</span>
+          <LogoMark className="h-7 w-7 shrink-0" />
+          <span>rylsher<span className="text-accent">.dev</span></span>
         </button>
 
         <div className="hidden items-center gap-6 md:flex">

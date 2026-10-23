@@ -36,6 +36,13 @@ export const certifications: Achievement[] = [
 
 export const honors: Achievement[] = [
   {
+    title: "PH100 2026",
+    subtitle: "Recognized among PH100's class of 2026",
+    year: "2026",
+    icon: "mdi:star-four-points",
+    highlight: true,
+  },
+  {
     title: "Champion: AWS Agentic Football Hackathon",
     subtitle: "AWS User Group e:Novators PH: agentic AI track",
     year: "2026",
